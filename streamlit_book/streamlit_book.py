@@ -2,7 +2,14 @@ import streamlit as st
 from glob import glob
 from .render import render_file
 
-def get_items(path: str):
+## Next button not working
+#if "page" not in st.session_state:
+#    st.session_state.page = 0
+
+#def on_next_click():
+#    st.session_state.page += 1
+
+def get_items(path: str, counter=0):
     """
     # Search for folders, python files or markdown files.
     Only looks at precisely the level of the given path.
@@ -15,15 +22,16 @@ def get_items(path: str):
     items_at_path = [item for item in items_at_path if ("/WIP" not in item)]
     # Create
     item_dict = {}
-    for my_item in items_at_path:
+    for i, my_item in enumerate(items_at_path):
+        counter = counter + i + 1
         if my_item[-3:] in (".py", ".md"):
             item_name = my_item.split("/")[-1]
             render_name = item_name[:-3]
-            item_dict[render_name] = {"type":"file", "path":my_item}
+            item_dict[render_name] = {"type":"file", "path":my_item, "counter":counter}
         else:
             item_name = my_item.split("/")[-2]
             render_name = item_name
-            item_dict[render_name] = {"type":"folder", "path":my_item}
+            item_dict[render_name] = {"type":"folder", "path":my_item, "counter":counter}
     return item_dict
 
 def set_book_config(path: str):
@@ -62,6 +70,7 @@ def set_book_config(path: str):
         if item_dict["type"]=="file":
             st.caption(item_dict["path"])
             render_file(fullpath=item_dict["path"])
+            #st.button("Next", on_click=on_next_click)
         else:
             st.warning("Empty folder")
     else:

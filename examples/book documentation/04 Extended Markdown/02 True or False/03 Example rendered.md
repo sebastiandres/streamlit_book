@@ -3,4 +3,4 @@ Is streamlit awesome?
 True
 success: The sleeper has awaken!
 error: Heresy!
-button: Check me!
+button: Check!

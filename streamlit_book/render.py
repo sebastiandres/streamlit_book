@@ -1,8 +1,8 @@
 import streamlit as st
 
 from .keywords import *
-from .render_to_do_list import render_to_do_list
-from .render_true_false import render_true_or_false
+from .render_to_do_list import to_do_list_from_lines
+from .render_true_false import true_or_false_from_lines
 from .render_multiple_choice import render_multiple_choice
 from .render_single_choice import render_single_choice
 from .render_text_input import render_text_input
@@ -21,9 +21,9 @@ def render_file(fullpath):
             exec("".join(lines))
         elif fullpath.endswith(".md"):
             if lines[0].startswith(TODO_KEYWORD):
-                render_to_do_list(lines)
+                to_do_list_from_lines(lines)
             elif lines[0].startswith(TRUE_FALSE_KEYWORD):
-                render_true_or_false(lines)
+                true_or_false_from_lines(lines)
             elif lines[0].startswith(MULTIPLE_CHOICE_KEYWORD):
                 render_multiple_choice(lines)
             elif lines[0].startswith(SINGLE_CHOICE_KEYWORD):

@@ -3,48 +3,68 @@ import glob
 
 from .keywords import *
 
-def render_true_or_false(lines):
+def parse_true_or_false(lines):
     """
+    Parses the line into a dictionary of values of interest.
     """
-    # Define default feedback messages 
-    quizz = {
-            SUCCESS:DEFAULT_SUCCESS_MESSAGE, 
-            ERROR:DEFAULT_ERROR_MESSAGE, 
-            BUTTON:DEFAULT_BUTTON_MESSAGE,
-            }
+    # Dict to store the parsed values
+    parse_dict = {}
     # Iterate through lines and process each line accordingly
     for i, line in enumerate(lines):
         if i==0:
             if line.startswith(TRUE_FALSE_KEYWORD):
                 continue
             else:
-                raise st.error(f"Error in the format.")
+                break
         elif i==1:
-            question = line
-            key = line.lower().replace(" ","")
+            parse_dict["question"] = line
         elif i==2:
             answer = line.strip()
             if answer in ("True", "False"):
-                quizz["answer"] = answer
+                parse_dict["answer"] = (answer == "True") # Convert to boolean, as required by the function
             else:
-                raise st.error(f"Answer must be True or False. Got {answer}")
+                break
         elif line.startswith(BUTTON):
             msg = line[len(BUTTON):].strip()
-            quizz[BUTTON] = msg  
+            parse_dict["button"] = msg  
         elif line.startswith(SUCCESS):
             msg = line[len(SUCCESS):].strip()
-            quizz[SUCCESS] = msg  
+            parse_dict["success"] = msg  
         elif line.startswith(ERROR):
             msg = line[len(ERROR):].strip()
-            quizz[ERROR] = msg
-        else:
-            st.markdown(line)
-    # If there is a question, create the radio question
+            parse_dict["error"] = msg
+    return parse_dict
+
+def true_or_false(question, answer, 
+                    success=DEFAULT_SUCCESS_MESSAGE, 
+                    error=DEFAULT_ERROR_MESSAGE, 
+                    button=DEFAULT_BUTTON_MESSAGE):
+    """
+    Renders the question and the tasks as a to-do list.
+    The tasks are a dictionary (supposed to be ordered as Python +3.6) of 
+    tasks and their status as a checkbox.
+    """
     if question:
+        key = question.lower().replace(" ","")
         user_answer = st.radio(question, options=["True", "False"], key=key)
-        if st.button(quizz[BUTTON]):
-            if user_answer == quizz["answer"]:
-                st.success(quizz[SUCCESS])
+        user_answer = (user_answer == "True") # Convert to boolean
+        if st.button(button):
+            if user_answer == answer:
+                st.success(success)
             else:
-                st.error(quizz[ERROR])
-    return quizz
+                st.error(error)
+        return
+    else:
+        return False 
+
+def true_or_false_from_lines(lines):
+    parse_dict = parse_true_or_false(lines)
+    return true_or_false(**parse_dict)
+
+if __name__=="__main__":
+    question = "Is this a true or false statement?"
+    answer = True
+    # Raw question
+    true_or_false(question, answer)
+    # With all the options
+    true_or_false(question+":", answer, success="Bien", error="Mal", button="Click")
