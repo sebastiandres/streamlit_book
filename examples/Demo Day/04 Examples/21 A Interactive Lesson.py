@@ -30,3 +30,19 @@ else:
     fig = plt.figure()
     plt.plot(df[x], df[y], 'or-')
     c4.pyplot(fig)
+
+
+st.subheader("Quick quizz")
+
+from streamlit_book.render_true_false import true_or_false
+question = "Have you like it so far?"
+true_or_false(question="Have you like it so far?", answer=True, 
+              success="I'm glad", error="I'm sorry")
+
+show_code = st.checkbox("Show code")
+if show_code:
+    st.code("""from streamlit_book.render_true_false import true_or_false
+true_or_false(question="Have you like it so far?", answer=True, 
+              success="I'm glad", error="I'm sorry")
+    """
+    )

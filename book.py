@@ -5,7 +5,7 @@ from streamlit_book import streamlit_book as stb
 st.set_page_config(layout="wide", page_title="Streamlit Book", page_icon="📖",)
 
 # Streamit book properties
-stb.set_book_config(path="examples", button="")
+stb.set_book_config(path="examples/Demo Day", button="bottom")
 
 #stb.set_book_config(path="./wrong_path/")
 #stb.set_book_config(path="examples/Demo Day")

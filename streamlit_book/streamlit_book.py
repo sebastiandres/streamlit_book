@@ -157,7 +157,6 @@ def get_selection_boxes_args_from_filepath(file_fullpath: str, base_path: str, f
     relative_path = file_fullpath.replace(f"{base_path}/", "")
     # Get the intermediate folders, but not the file itself
     selected_labels = relative_path.split("/")
-    #st.write("selected_labels:", selected_labels)
     # Initialize and populate the list of dictionaries
     selection_boxes_args = []
     working_path = base_path
@@ -198,7 +197,7 @@ def set_book_config(path: str,
                     button_next: str="➡️",
                     button_previous: str="⬅️",
                     button_bookmark="🔖",
-                    button_switch_method="S"):
+                    button_switch_method="🔄"):
     """
     Renders a dynamically filled sidebar with selectboxes, allowing
     the user to select a file that gets displayed on the main view.
@@ -218,7 +217,7 @@ def set_book_config(path: str,
     # Initialize the session state variables
     if "file_number" not in st.session_state:
         st.session_state.file_number = INITIAL_FILE_NUMBER
-    if "navigation_method" not in st.session_state:
+    if "navigate_with_buttons" not in st.session_state:
         valid_button_argument = button in ("top", "bottom")
         st.session_state.navigate_with_buttons = valid_button_argument
     # Get the files at path level (only files, not folders)

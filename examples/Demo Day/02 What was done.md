@@ -10,3 +10,6 @@ Version 0.0.1
 * Render from keywords (use directly a function)
 * Initial documentation version - done in streamlit books
 * Creating lots of files for debugging. 
+
+![Streamlit Book](https://raw.githubusercontent.com/sebastiandres/streamlit_book/main/examples/Demo%20Day/folder_structure.png)
+
