@@ -8,7 +8,8 @@ st.set_page_config(layout="wide", page_title="Streamlit Book", page_icon="📖",
 #stb.set_book_config(path="examples", button="top")
 
 #stb.set_book_config(path="./wrong_path/")
-stb.set_book_config(path="examples/Demo Day")
+#stb.set_book_config(path="examples/Demo Day")
+stb.set_book_config(path="examples/Demo Day", button="top")
 #stb.set_book_config(path="examples/Demo Day", button="bottom")
 #stb.set_book_config(path="examples/Demo Day", button="top", button_next="Siguiente", button_previous="Previo", button_bookmark="Marcador")
 #stb.set_book_config(path="examples/Demo Day", button="")
