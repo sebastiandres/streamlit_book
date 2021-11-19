@@ -53,6 +53,13 @@ from .render import render_file
             st.warning("The file couldnt be obtained")
 """
 
+def on_switch_click():
+    """
+    Alternates between one navigation method (button or selectbox)
+    """
+    st.session_state.navigate_with_buttons = not st.session_state.navigate_with_buttons
+    return
+
 def on_bookmark_click():
     """
     Stores current page as the initial page
@@ -190,7 +197,8 @@ def set_book_config(path: str,
                     button: str="bottom", 
                     button_next: str="➡️",
                     button_previous: str="⬅️",
-                    button_bookmark="🔖"):
+                    button_bookmark="🔖",
+                    button_switch_method="S"):
     """
     Renders a dynamically filled sidebar with selectboxes, allowing
     the user to select a file that gets displayed on the main view.
@@ -207,9 +215,12 @@ def set_book_config(path: str,
     # Sanitize the path
     if path.endswith("/"):
         path = path[:-1]
-    # Initialize the session state file_number
+    # Initialize the session state variables
     if "file_number" not in st.session_state:
         st.session_state.file_number = INITIAL_FILE_NUMBER
+    if "navigation_method" not in st.session_state:
+        valid_button_argument = button in ("top", "bottom")
+        st.session_state.navigate_with_buttons = valid_button_argument
     # Get the files at path level (only files, not folders)
     file_list = get_all_files(path)
     # Check that we have at least 1 file to render
@@ -217,23 +228,26 @@ def set_book_config(path: str,
         st.error(f"No files were found at the given path. Please check the provided path: {path}")
         return
 
-    if button in ("top", "bottom"):
+    c1, c2, c3, c4, c5 = st.columns([0.9, 0.1, 0.1, 0.1, 0.1])
+    if button_bookmark:
+        c4.button(button_bookmark, on_click=on_bookmark_click, key="bookmark_button_top")
+    if button_switch_method:
+        c5.button(button_switch_method, on_click=on_switch_click, key="switch_button_top")
+
+    if st.session_state.navigate_with_buttons:
         # Update file_fullpath
         selected_file_fullpath = file_list[st.session_state.file_number]
         # If required, put the button on top of the page. Use columns for alignment
-        c1, c2, c3, c4 = st.columns([0.9, 0.1, 0.1, 0.1])
         c1.caption(f"Page {st.session_state.file_number+1} of {st.session_state.total_files}. File: {selected_file_fullpath}")
         if button=="top":
             c2.button(button_previous, on_click=on_previous_click, key="previous_button_top")
-            c3.button(button_bookmark, on_click=on_bookmark_click, key="bookmark_button_top")
-            c4.button(button_next, on_click=on_next_click, key="next_button_top")
+            c3.button(button_next, on_click=on_next_click, key="next_button_top")
         # Render the file using the magic
         render_file(selected_file_fullpath)
         # If required, put the button on the bottom of the page. Use columns for alignment
         if button=="bottom":
             c2.button(button_previous, on_click=on_previous_click, key="previous_button_bottom")
-            c3.button(button_bookmark, on_click=on_bookmark_click, key="bookmark_button_top")
-            c4.button(button_next, on_click=on_next_click, key="next_button_bottom")
+            c3.button(button_next, on_click=on_next_click, key="next_button_bottom")
         ## Autor
         st.caption("Streamlit book - created by [sebastiandres](https://sebastiandres.xyz) - Nov 2021")    
     else:

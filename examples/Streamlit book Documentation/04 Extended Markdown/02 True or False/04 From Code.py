@@ -12,15 +12,13 @@ answer = True
 true_or_false(question, answer)
 """
 )
-if True:
-    question = "Is this a true or false statement?"
-    answer = True
-    true_or_false(question, answer)
+question = "Is this a true or false statement?"
+answer = True
+true_or_false(question, answer)
 
 st.subheader("Example with all optional arguments:")
 
 with st.echo("below"):
-    question = "Is this a true or false statement?"
-    answer = True
-    true_or_false(question+":", answer, 
-                    success="Bien", error="Mal", button="Click")
+    question = "Is this a true or false statement?:"
+    answer = False
+    true_or_false(question, answer)
