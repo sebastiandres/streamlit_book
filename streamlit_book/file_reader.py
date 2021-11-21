@@ -2,7 +2,7 @@ import streamlit as st
 from glob import glob
 import os
 
-from render import render_file
+from .render import render_file
 
 """        
         # Select the file_fullpath
