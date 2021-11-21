@@ -6,7 +6,7 @@ from streamlit_book import version as current_version
 print("Current Library Version:", current_version)
 
 # Use the README for the long description
-long_description=open('README.mds').read()
+long_description=open('README.md').read()
 
 setup(
     name='streamlit_book',
