@@ -1,5 +1,0 @@
-st.header("This is a header")
-st.subheader("This is a subheader")
-st.text("This is a text")
-st.markdown("This is a **markdown**")
-st.latex(r"$\LaTeX$")
