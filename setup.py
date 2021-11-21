@@ -19,4 +19,6 @@ setup(
     license='MIT',
     description='A streamlit companion library to create a interactive reader for the content on a given folder.',
     long_description=long_description,
-)
+    extras_require = {
+        'build': ['streamlit']
+    })
