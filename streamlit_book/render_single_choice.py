@@ -1,22 +1,15 @@
 import streamlit as st
 
-from .keywords import *
+try:
+    from keywords import *
+except:
+    from .keywords import *
 
-def single_choice_from_lines(lines):
+def single_choice_parser(lines):
     """
     """
     # Define default feedback messages 
-    quizz = {
-            SUCCESS:DEFAULT_SUCCESS_MESSAGE, 
-            ERROR:DEFAULT_ERROR_MESSAGE, 
-            BUTTON:DEFAULT_BUTTON_MESSAGE,
-            "answer_options":[],
-            "true_answer":"",
-            "answer":"",
-            "question":"",
-            }
-    # Save space for warnings
-    st_placeholder = st.empty()
+    parse_dict = {}
     # Iterate through lines and process each line accordingly
     for i, line in enumerate(lines):
         if i==0:
@@ -26,34 +19,48 @@ def single_choice_from_lines(lines):
                 raise st.error(f"Error in the format.")
         elif line.startswith(SINGLE_CHOICE_CORRECT):
             option_text = line[len(SINGLE_CHOICE_CORRECT):].strip()
-            quizz["answer_options"].append(option_text)
-            if quizz["true_answer"] == "":
-                quizz["true_answer"] = option_text
-            else:
-                st_placeholder.error(f"FORMAT ERROR. Check the markdown for this activity. More than one correct answer.")
+            parse_dict["options"].append(option_text)
+            if parse_dict["answer"] == "":
+                parse_dict["answer"] = option_text
         elif line.startswith(SINGLE_CHOICE_WRONG):
             option_text = line[len(SINGLE_CHOICE_WRONG):].strip()
-            quizz["answer_options"].append(option_text)
+            parse_dict["options"].append(option_text)
         elif line.startswith(BUTTON):
             msg = line[len(BUTTON):].strip()
-            quizz[BUTTON] = msg  
+            parse_dict[BUTTON] = msg  
         elif line.startswith(SUCCESS):
             msg = line[len(SUCCESS):].strip()
-            quizz[SUCCESS] = msg  
+            parse_dict[SUCCESS] = msg  
         elif line.startswith(ERROR):
             msg = line[len(ERROR):].strip()
-            quizz[ERROR] = msg
+            parse_dict[ERROR] = msg
         else:
-            quizz["question"] += line
-    if len(quizz["question"])>0 and len(quizz["answer_options"])>0:
-        user_answer = st.radio(quizz["question"], 
-                                options=quizz["answer_options"])
-        if st.button(quizz[BUTTON]):
-            if user_answer == quizz["true_answer"]:
-                st.success(quizz[SUCCESS])
+            parse_dict["question"] += line
+    return parse_dict
+
+def single_choice_from_lines(lines):
+    """
+    Parse a single choice question from the given lines.
+    """
+    parse_dict = single_choice_parser(lines)
+    return single_choice_from_lines(**parse_dict)
+
+def single_choice(question, options, 
+                    header="",
+                    success=DEFAULT_SUCCESS_MESSAGE, 
+                    error=DEFAULT_ERROR_MESSAGE, 
+                    button=DEFAULT_BUTTON_MESSAGE):
+    """
+    Render a single choice question from the given parameters.
+    """
+    st.markdown(header)
+    if len(question)>0 and len(options)>0:
+        user_answer = st.radio(question, options=options)
+        if st.button(button):
+            if user_answer == true_answer:
+                st.success(success)
             else:
-                st.error(quizz[ERROR])
-    # If no option is correct, display a warning message
-    if quizz["true_answer"]=="":
-        st_placeholder.error("FORMAT ERROR. Check the markdown for this activity. No correct answer has been defined.")
-    return quizz
+                st.error(error)
+        return True
+    else:
+        return False

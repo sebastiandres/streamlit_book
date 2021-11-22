@@ -1,8 +1,12 @@
 import streamlit as st
 
-from .keywords import TRUE_FALSE_KEYWORD, BUTTON, SUCCESS, ERROR, DEFAULT_BUTTON_MESSAGE, DEFAULT_SUCCESS_MESSAGE, DEFAULT_ERROR_MESSAGE
+try:
+    from keywords import TRUE_FALSE_KEYWORD, BUTTON, SUCCESS, ERROR, DEFAULT_BUTTON_MESSAGE, DEFAULT_SUCCESS_MESSAGE, DEFAULT_ERROR_MESSAGE
+except:
+    from .keywords import TRUE_FALSE_KEYWORD, BUTTON, SUCCESS, ERROR, DEFAULT_BUTTON_MESSAGE, DEFAULT_SUCCESS_MESSAGE, DEFAULT_ERROR_MESSAGE
 
-def parse_true_or_false(lines):
+
+def true_or_false_parser(lines):
     """
     Parses the line into a dictionary of values of interest.
     """
@@ -35,6 +39,13 @@ def parse_true_or_false(lines):
             parse_dict["error"] = msg
     return parse_dict
 
+def true_or_false_from_lines(lines):
+    """
+    .
+    """
+    parse_dict = true_or_false_parser(lines)
+    return true_or_false(**parse_dict)
+
 def true_or_false(question, answer, 
                     success=DEFAULT_SUCCESS_MESSAGE, 
                     error=DEFAULT_ERROR_MESSAGE, 
@@ -53,13 +64,9 @@ def true_or_false(question, answer,
                 st.success(success)
             else:
                 st.error(error)
-        return
+        return True
     else:
         return False 
-
-def true_or_false_from_lines(lines):
-    parse_dict = parse_true_or_false(lines)
-    return true_or_false(**parse_dict)
 
 if __name__=="__main__":
     question = "Is this a true or false statement?"

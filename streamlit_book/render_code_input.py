@@ -1,6 +1,9 @@
 import streamlit as st
 
-from .keywords import *
+try:
+    from keywords import *
+except:
+    from .keywords import *
 
 def code_input_from_lines(lines):
     """

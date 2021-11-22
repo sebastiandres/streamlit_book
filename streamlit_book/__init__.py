@@ -1,3 +1,7 @@
+import os
+import sys
+sys.path.insert(0, os.path.abspath('.'))
+
 # The verssion of the library
 from .version_file import version_number as version
 

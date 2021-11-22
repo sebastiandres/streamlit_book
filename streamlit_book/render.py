@@ -1,13 +1,23 @@
 import streamlit as st
 
-from .keywords import *
-from .render_to_do_list import to_do_list_from_lines
-from .render_true_or_false import true_or_false_from_lines
-from .render_multiple_choice import render_multiple_choice
-from .render_single_choice import render_single_choice
-from .render_text_input import render_text_input
-from .render_code_input import render_code_input
-from .render_file_upload import render_file_upload
+try:
+    from keywords import *
+    from render_to_do_list import to_do_list_from_lines
+    from render_true_or_false import true_or_false_from_lines
+    from render_multiple_choice import multiple_choice_from_lines
+    from render_single_choice import single_choice_from_lines
+    from render_text_input import text_input_from_lines
+    from render_code_input import code_input_from_lines
+    from render_file_upload import file_upload_from_lines
+except:
+    from .keywords import *
+    from .render_to_do_list import to_do_list_from_lines
+    from .render_true_or_false import true_or_false_from_lines
+    from .render_multiple_choice import multiple_choice_from_lines
+    from .render_single_choice import single_choice_from_lines
+    from .render_text_input import text_input_from_lines
+    from .render_code_input import code_input_from_lines
+    from .render_file_upload import file_upload_from_lines
 
 def render_file(fullpath):
     """

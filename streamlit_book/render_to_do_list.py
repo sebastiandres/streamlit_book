@@ -1,10 +1,14 @@
 import streamlit as st
 
-def parse_to_do_list(lines):
+try:
+    from keywords import TODO_KEYWORD, TODO_COMPLETED, TODO_INCOMPLETE, ERROR
+except:
+    from .keywords import TODO_KEYWORD, TODO_COMPLETED, TODO_INCOMPLETE, ERROR
+
+def to_do_list_parser(lines):
     """
     Parses the line into a dictionary of values of interest.
     """
-    from .keywords import TODO_KEYWORD, TODO_COMPLETED, TODO_INCOMPLETE, ERROR
     # Dict to store the parsed values
     parse_dict = {
                     "tasks":{}, 
@@ -26,6 +30,14 @@ def parse_to_do_list(lines):
             parse_dict["header"] = line
     return parse_dict
 
+def to_do_list_from_lines(lines):
+    """
+    Renders a to-do list from a list of lines.
+    """
+    parse_dict = to_do_list_parser(lines)
+    to_do_list(tasks=parse_dict["tasks"], header=parse_dict["header"])
+    return
+
 def to_do_list(tasks, header=""):
     """
     Renders the optional header and the tasks as a to-do list.
@@ -45,13 +57,6 @@ def to_do_list(tasks, header=""):
     else:
         return False
 
-def to_do_list_from_lines(lines):
-    """
-    Renders a to-do list from a list of lines.
-    """
-    parse_dict = parse_to_do_list(lines)
-    to_do_list(tasks=parse_dict["tasks"], header=parse_dict["header"])
-    return
 
 if __name__=="__main__":
     render_to_do_list({"a":True, "b":False, "c":True}, header="To do list")

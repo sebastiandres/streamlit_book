@@ -2,56 +2,10 @@ import streamlit as st
 from glob import glob
 import os
 
-from .render import render_file
-
-"""        
-        # Select the file_fullpath
-        selected_file_fullpath = file_list[st.session_state.file_number]
-        # Get the selection boxes depending on the current file selected
-        selection_boxes_args = get_selection_boxes_args_from_filepath(selected_file_fullpath, path, file_list)
-        # Initiatilize the while
-        level = 0
-        working_path = path
-        selection_box_args = selection_boxes_args[level]
-        previous_selected_option = selection_box_args["preset_option"]
-        changed_on_selection = False
-        # Loop through the selection boxes
-        while not is_file(previous_selected_option):
-            # Put a select box with options and collect user selection
-            user_selected_option = st.sidebar.selectbox(selection_box_args["label"], 
-                                                        options=selection_box_args["options"], 
-                                                        index=selection_box_args["index"],
-                                                        key=selection_box_args["key"],
-                                                        )
-            # Increase the level
-            level += 1
-            # If the user selects something different to what has been selected, 
-            # everything needs to be recalculated from that level
-            if changed_on_selection or user_selected_option != previous_selected_option:
-                # Update lower levels to the first new selection
-                working_path = f"{working_path}/{user_selected_option}"
-                selection_box_args = get_selection_box_args_at_path(working_path, file_list, level)
-                changed_on_selection = True
-            else:
-                # Use what was previously computed
-                working_path = f"{working_path}/{user_selected_option}"
-                selection_box_args = selection_boxes_args[level]
-            # Update the previous selected option
-            previous_selected_option = selection_box_args["preset_option"]
-        # Write a last box, if the user selected folder
-        if not is_file(working_path):
-            user_selected_option = st.sidebar.selectbox(selection_box_args["label"], 
-                                                        options=selection_box_args["options"], 
-                                                        index=selection_box_args["index"],
-                                                        key=selection_box_args["key"],
-                                                        )       
-            working_path = f"{working_path}/{user_selected_option}"
-        # Update the file_number session state
-        if working_path in file_list:
-            st.session_state.file_number = file_list.index(working_path)
-        else:
-            st.warning("The file couldnt be obtained")
-"""
+try:
+    from .render import render_file
+except:
+    from render import render_file
 
 def on_switch_click():
     """
@@ -283,5 +237,5 @@ def set_book_config(path: str,
             else:
                 st.warning("Empty folder")
         ## Autor
-        st.sidebar.caption("Streamlit book - [sebastiandres](https://sebastiandres.xyz) - Nov 2021")
+        st.sidebar.caption("[Streamlit book](https://streamlit_book.readthedocs.io/) - [sebastiandres](https://sebastiandres.xyz) - Nov 2021")
     return

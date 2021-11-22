@@ -6,7 +6,12 @@ Welcome to the streamlit_book's documentation!
 Try it out!
 ------------
 
+There are a couple of simple apps
 
+* [Streamlit Book Examples](https://share.streamlit.io/sebastiandres/streamlit_book_examples/main/book.py)
+* [Happy Birds](https://share.streamlit.io/sebastiandres/streamlit_happy_birds/main/happy_birds.py)
+
+Contents:
 
 .. toctree::
    :maxdepth: 1
@@ -16,4 +21,4 @@ Try it out!
    install
    examples
    doc_for_users
-   doc_for_devs
+   doc_for_devs   
