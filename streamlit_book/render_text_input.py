@@ -2,7 +2,7 @@ import streamlit as st
 
 from .keywords import *
 
-def render_text_input(lines):
+def text_input_from_lines(lines):
     """
     """
     # Define default feedback messages 

@@ -2,7 +2,7 @@ import streamlit as st
 
 from .keywords import *
 
-def render_multiple_choice(lines):
+def multiple_choice_from_lines(lines):
     """
     """
     # Define default feedback messages 

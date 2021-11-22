@@ -2,7 +2,7 @@ import streamlit as st
 
 from .keywords import *
 
-def render_file_upload(lines):
+def file_upload_from_lines(lines):
     """
     """
     KEYWORD = "#file-upload"

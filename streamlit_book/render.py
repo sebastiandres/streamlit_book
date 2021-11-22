@@ -25,15 +25,15 @@ def render_file(fullpath):
             elif lines[0].startswith(TRUE_FALSE_KEYWORD):
                 true_or_false_from_lines(lines)
             elif lines[0].startswith(MULTIPLE_CHOICE_KEYWORD):
-                render_multiple_choice(lines)
+                multiple_choice_from_lines(lines)
             elif lines[0].startswith(SINGLE_CHOICE_KEYWORD):
-                render_single_choice(lines)
+                single_choice_from_lines(lines)
             elif lines[0].startswith(CODE_INPUT_KEYWORD):
-                render_code_input(lines)
+                code_input_from_lines(lines)
             elif lines[0].startswith(TEXT_INPUT_KEYWORD):
-                render_text_input(lines)
+                text_input_from_lines(lines)
             elif lines[0].startswith(FILE_UPLOAD_KEYWORD):
-                render_file_upload(lines)
+                file_upload_from_lines(lines)
             else:
                 st.markdown("".join(lines), unsafe_allow_html=True)
         else:
