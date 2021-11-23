@@ -18,13 +18,16 @@ make show:
 	open docs/build/html/index.html
 
 make install:
+	# New
+	pip install -e /srv/pkg
+	# old
 	rm -f dist/*.tar.gz
-	rm -f build/lib/pypsdier/*.py
-	rm -f /miniconda3/lib/python3.7/site-packages/pypsdier/*.py
+	rm -f build/lib/streamlit_book/*.py
+	rm -f /miniconda3/lib/python3.7/site-packages/streamlit_book/*.py
 	python setup.py install
 
 version:
-	nano pypsdier/version_file.py
+	nano streamlit_book/version_file.py
 
 test.pypi:
 	rm -f dist/*.tar.gz
