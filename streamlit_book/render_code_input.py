@@ -6,9 +6,13 @@ except:
     from .keywords import *
 
 def code_input_from_lines(lines):
-    """
-    """
-    # Define default feedback messages 
+    """Parses a list of lines into a dictionary with the parsed values.
+
+    :param lines: list of lines
+    :type lines: list
+    :return: dict of the parsed values for the code input quizz type.
+    :rtype: dict
+    """    # Define default feedback messages 
     quizz = {
             SUCCESS:DEFAULT_SUCCESS_MESSAGE, 
             ERROR:DEFAULT_ERROR_MESSAGE, 

@@ -6,9 +6,13 @@ except:
     from .keywords import *
 
 def text_input_from_lines(lines):
-    """
-    """
-    # Define default feedback messages 
+    """Parses a list of lines into a dictionary with the parsed values.
+
+    :param lines: list of lines
+    :type lines: list
+    :return: Returns a dict of the parsed values for the text input quizz type.
+    :rtype: dict
+    """    # Define default feedback messages 
     quizz = {
             SUCCESS:DEFAULT_SUCCESS_MESSAGE, 
             ERROR:DEFAULT_ERROR_MESSAGE, 

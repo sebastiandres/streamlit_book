@@ -7,8 +7,12 @@ except:
 
 
 def true_or_false_parser(lines):
-    """
-    Parses the line into a dictionary of values of interest.
+    """Parses a list of lines into a dictionary with the parsed values.
+
+    :param lines: list of lines
+    :type lines: list
+    :return: parsed values for the true or false quizz type.
+    :rtype: dict
     """
 
     # Dict to store the parsed values
@@ -39,21 +43,24 @@ def true_or_false_parser(lines):
             parse_dict["error"] = msg
     return parse_dict
 
-def true_or_false_from_lines(lines):
-    """
-    .
-    """
-    parse_dict = true_or_false_parser(lines)
-    return true_or_false(**parse_dict)
-
 def true_or_false(question, answer, 
                     success=DEFAULT_SUCCESS_MESSAGE, 
                     error=DEFAULT_ERROR_MESSAGE, 
                     button=DEFAULT_BUTTON_MESSAGE):
-    """
-    Renders the question and the tasks as a to-do list.
-    The tasks are a dictionary (supposed to be ordered as Python +3.6) of 
-    tasks and their status as a checkbox.
+    """Renders a true or false question from arguments.
+
+    :param question: question to be displayed before the true or false options
+    :type question: str
+    :param answer: expected answer to the question, can be True or False
+    :type answer: str
+    :param success: message to be displayed when the user answers correctly
+    :type success: str, optional
+    :param error: message to be displayed when the user answers incorrectly
+    :type error: str, optional
+    :param button: message to be displayed on the button that checks the answer
+    :type button: str, optional
+    :return: boolean with the exit status of the function
+    :rtype: bool
     """
     if question:
         key = question.lower().replace(" ","")
@@ -68,10 +75,13 @@ def true_or_false(question, answer,
     else:
         return False 
 
-if __name__=="__main__":
-    question = "Is this a true or false statement?"
-    answer = True
-    # Raw question
-    true_or_false(question, answer)
-    # With all the options
-    true_or_false(question+":", answer, success="Bien", error="Mal", button="Click")
+def true_or_false_from_lines(lines):
+    """Renders a true or false question from a list of lines.
+
+    :param lines: list of lines
+    :type lines: list
+    :return: None
+    """
+    parse_dict = true_or_false_parser(lines)
+    true_or_false(**parse_dict)
+    return

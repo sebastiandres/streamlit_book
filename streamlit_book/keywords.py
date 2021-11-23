@@ -1,6 +1,7 @@
 TODO_KEYWORD = "stb.to-do"
 TODO_COMPLETED = "- [x] "
 TODO_INCOMPLETE = "- [ ] "
+TODO_SUCCESS = "Bravo!"
 
 TRUE_FALSE_KEYWORD = "stb.true-false"
 
