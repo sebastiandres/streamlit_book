@@ -79,7 +79,8 @@ def multiple_choice(question, options_dict,
         # Write the options and append the user answers into the list cb_list
         for option, answer in options_dict.items():
             key = (question + option + str(answer)).lower().replace(" ", "_")
-            cb = st.checkbox(option, value=answer, key=key)
+            # Post the option with no option
+            cb = st.checkbox(option, value=False, key=key)
             cb_list.append(cb)
         # Check if the correct checkboxes are checked
         if st.button(button):

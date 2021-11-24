@@ -6,10 +6,10 @@ Welcome to the streamlit_book's documentation!
 Try it out!
 ------------
 
-There are a couple of simple apps
+There are a couple of examples where you can try the library:
 
-* [Streamlit Book Examples](https://share.streamlit.io/sebastiandres/streamlit_book_examples/main/book.py)
-* [Happy Birds](https://share.streamlit.io/sebastiandres/streamlit_happy_birds/main/happy_birds.py)
+* `Streamlit Book Examples <https://share.streamlit.io/sebastiandres/streamlit_book_examples/main/book.py>`_
+* `Happy Birds <https://share.streamlit.io/sebastiandres/streamlit_happy_birds/main/happy_birds.py>`_
 
 Contents:
 
