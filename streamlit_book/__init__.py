@@ -2,9 +2,8 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('.'))
 
-# The verssion of the library
+# The version of the library
 try:
-    from version_file import version_number as version
     ### The main function to be used to read the files
     from file_reader import set_book_config
     # Some additional interesting functions
@@ -16,7 +15,6 @@ try:
     #from render_code_input import code_input
     #from render_file_upload import file_upload
 except:
-    from .version_file import version_number as version
     ### The main function to be used to read the files
     from .file_reader import set_book_config
     # Some additional interesting functions
