@@ -1,7 +1,7 @@
-Documentation for Users 
+Python functions 
 ==============================================
 
-As a regular user of streamlit_book, this are the functions you should know and use. 
+As a regular user of streamlit_book, this are the functions you might use: 
 
 .. autofunction:: __init__.set_book_config
 

@@ -83,7 +83,8 @@ def multiple_choice(question, options_dict,
             cb = st.checkbox(option, value=False, key=key)
             cb_list.append(cb)
         # Check if the correct checkboxes are checked
-        if st.button(button):
+        key = ("multiple-choice:" + question + "".join(options_dict.keys())).lower().replace(" ", "_")
+        if st.button(button, key=key):
             if all(u==a for u, a in zip(cb_list, options_dict.values())):
                 st.success(success)
             else:

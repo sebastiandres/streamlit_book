@@ -76,12 +76,11 @@ def single_choice(question, options, answer_index,
         st.error("Must have at least 2 options")
         return False
     else:
-        # Write the question
-        st.markdown(question)
         # Write the options with radio button: only one option can be selected
         user_answer = st.radio(question, options=options)
         # Check if correct answer
-        if st.button(button):
+        key = ("single-choice:" + question + "".join(options)).lower().replace(" ", "_")
+        if st.button(button, key=key):
             if options.index(user_answer) == answer_index:
                 st.success(success)
             else:

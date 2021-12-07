@@ -24,9 +24,6 @@ author = 'Sebastian Flores Benner'
 
 # The full version, including alpha/beta/rc tags
 # Note: We import this to only define this in the src folder
-from version_file import version_number
-release = version_number
-print(f"{project} version number: {release}")
 
 # -- General configuration ---------------------------------------------------
 
@@ -54,7 +51,9 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
+
 html_theme = 'sphinx_rtd_theme'
+#html_theme = 'sphinx_documatt_theme'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

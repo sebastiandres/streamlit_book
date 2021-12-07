@@ -8,17 +8,14 @@ Try it out!
 
 There are a couple of examples where you can try the library:
 
-* `Streamlit Book Examples <https://share.streamlit.io/sebastiandres/streamlit_book_examples/main/book.py>`_
-* `Happy Birds <https://share.streamlit.io/sebastiandres/streamlit_happy_birds/main/happy_birds.py>`_
-
-Contents:
+* `Happy Birds <https://share.streamlit.io/sebastiandres/streamlit_happy_birds/main/happy_birds.py>`_ : A self contained example that mixes all the features of the library with a funny twist.
+* `Streamlit Book Examples <https://share.streamlit.io/sebastiandres/streamlit_book_examples/main/book.py>`_ : An example with multiple pages, examples and content.
 
 .. toctree::
    :maxdepth: 1
-   :caption: Documenation:
+   :caption: Content
 
    intro
    install
-   examples
+   markdown
    doc_for_users
-   doc_for_devs   
