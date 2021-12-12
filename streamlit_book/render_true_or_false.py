@@ -1,8 +1,10 @@
 import streamlit as st
 
 try:
+    from keywords import check_keyword
     from keywords import TRUE_FALSE_KEYWORD, BUTTON, SUCCESS, ERROR, DEFAULT_BUTTON_MESSAGE, DEFAULT_SUCCESS_MESSAGE, DEFAULT_ERROR_MESSAGE
 except:
+    from .keywords import check_keyword
     from .keywords import TRUE_FALSE_KEYWORD, BUTTON, SUCCESS, ERROR, DEFAULT_BUTTON_MESSAGE, DEFAULT_SUCCESS_MESSAGE, DEFAULT_ERROR_MESSAGE
 
 
@@ -20,7 +22,7 @@ def true_or_false_parser(lines):
     # Iterate through lines and process each line accordingly
     for i, line in enumerate(lines):
         if i==0:
-            if line.startswith(TRUE_FALSE_KEYWORD):
+            if check_keyword(line, TRUE_FALSE_KEYWORD):
                 continue
             else:
                 break

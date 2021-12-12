@@ -1,3 +1,4 @@
+import streamlit.components.v1 as components
 import streamlit as st
 from glob import glob
 import os
@@ -7,19 +8,11 @@ try:
 except:
     from render import render_file
 
-def on_switch_click():
-    """
-    Alternates between one navigation method (button or selectbox)
-    """
-    st.session_state.navigate_with_buttons = not st.session_state.navigate_with_buttons
+def on_gotopage_click():
+    st.session_state.toc = False
     return
 
-def on_bookmark_click():
-    """
-    Stores current page as the initial page
-    """
-    with open("bookmark.txt", "w") as f:
-        f.write(str(st.session_state.file_number))
+def on_refresh_click():
     return
 
 def on_next_click():
@@ -38,12 +31,23 @@ def on_previous_click():
     st.session_state.file_number = (st.session_state.file_number - 1) % st.session_state.total_files
     return
 
-def book_parts_convention(level):
+def create_buttons(caption_text, button_previous, button_next, button_refresh, 
+                    username, repository):
     """
-    Returns the name of the chapter/section at the given level.
+    Function to create the navigation buttons
     """
-    book_convention_dict = {0:"section", 1:"chapter", 2:"subchapter", 3:"content"}
-    return book_convention_dict[min(level, len(book_convention_dict))]
+    st.caption(caption_text)
+    c1, c2, c3, c4 = st.columns([1, 1, 1, 10])
+    c1.button(button_previous, 
+                help="Previous page", on_click=on_previous_click, key="previous_button_top")
+    c2.button(button_next, 
+                help="Next page", on_click=on_next_click, key="next_button_top")
+    c3.button(button_refresh, 
+                help="Refresh current page", on_click=on_refresh_click, key="switch_button_top")
+    if len(username+repository) > 0:
+        c4.markdown(f"[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FP{username}%2F{repository}&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)",
+                    unsafe_allow_html=True)
+    return
 
 def get_all_files(path: str):
     """
@@ -146,96 +150,79 @@ def get_items(path: str):
             item_dict[render_name] = {"type":"folder", "path":my_item}
     return item_dict
 
-def set_book_config(path: str, 
-                    button: str="bottom", 
-                    button_next: str="➡️",
+def set_book_config(path: str,
+                    toc: bool=False,    
+                    button: str="top", 
                     button_previous: str="⬅️",
-                    button_bookmark="🔖",
-                    button_switch_method="🔄"):
+                    button_next: str="➡️",
+                    button_refresh="🔄",
+                    username: str="",
+                    repository: str=""):
+    """Sets the book configuration, and displays the selected file.
+
+    :param toc: If True, it will display the table of contents for the files on the path.
+    :type toc: bool
+    :param button: "top" (default behavior) or "bottom".
+    :type button: str
+    :param button_previous: icon or text for the previous button.
+    :type button_previous: str
+    :param button_next: icon or text for the next button.
+    :type button_next: str
+    :param button_refresh: icon or text for the refresh button.
+    :type button_refresh: str
+    :param username: GitHub username (for the hits counter).
+    :type username: str
+    :param repository: GitHub repository (for the hits counter).
+    :type repository: str
+    :return: None
     """
-    Renders a dynamically filled sidebar with selectboxes, allowing
-    the user to select a file that gets displayed on the main view.
-    It uses recursion to navigate though the folder selections until
-    reaching a file that can be render.
-    """
+
     # Parameters: File number goes from 0 to n-1.
-    # Look for bookmark file in the folder
-    if os.path.isfile(f"bookmark.txt"):
-        with open("bookmark.txt", "r") as f:
-            INITIAL_FILE_NUMBER = int(f.read())
-    else:
-        INITIAL_FILE_NUMBER = 0
+    #from IPython import embed; embed()
+ 
     # Sanitize the path
     if path.endswith("/"):
         path = path[:-1]
+
+    # Initialize the session state variables
+    if "toc" not in st.session_state:
+        st.session_state.toc = toc
+
     # Initialize the session state variables
     if "file_number" not in st.session_state:
-        st.session_state.file_number = INITIAL_FILE_NUMBER
-    if "navigate_with_buttons" not in st.session_state:
-        valid_button_argument = button in ("top", "bottom")
-        st.session_state.navigate_with_buttons = valid_button_argument
+        st.session_state.file_number = 0
+
     # Get the files at path level (only files, not folders)
     file_list = get_all_files(path)
+
     # Check that we have at least 1 file to render
     if len(file_list) == 0:
         st.error(f"No files were found at the given path. Please check the provided path: {path}")
         return
 
-    c1, c2, c3, c4, c5 = st.columns([0.9, 0.1, 0.1, 0.1, 0.1])
-    if button_bookmark:
-        c4.button(button_bookmark, on_click=on_bookmark_click, key="bookmark_button_top")
-    if button_switch_method:
-        c5.button(button_switch_method, on_click=on_switch_click, key="switch_button_top")
+    # Update file_fullpath
+    selected_file_fullpath = file_list[st.session_state.file_number]
+    caption_text = f"Page {st.session_state.file_number+1} of {st.session_state.total_files}. File: {selected_file_fullpath}"
 
-    if st.session_state.navigate_with_buttons:
-        # Update file_fullpath
-        selected_file_fullpath = file_list[st.session_state.file_number]
+    if st.session_state.toc:
+        option = st.radio("Table of contents", options=file_list)
+        st.session_state.file_number = file_list.index(option)
+        st.button("Go to page", on_click=on_gotopage_click, key="gotopage")
+    else:
         # If required, put the button on top of the page. Use columns for alignment
-        c1.caption(f"Page {st.session_state.file_number+1} of {st.session_state.total_files}. File: {selected_file_fullpath}")
         if button=="top":
-            c2.button(button_previous, on_click=on_previous_click, key="previous_button_top")
-            c3.button(button_next, on_click=on_next_click, key="next_button_top")
+            create_buttons(caption_text, button_previous, button_next, button_refresh, 
+                            username, repository)
+
         # Render the file using the magic
-        render_file(selected_file_fullpath)
+        try:
+            render_file(selected_file_fullpath)
+        except Exception as e:
+            st.exception(e)
+
         # If required, put the button on the bottom of the page. Use columns for alignment
         if button=="bottom":
-            c2.button(button_previous, on_click=on_previous_click, key="previous_button_bottom")
-            c3.button(button_next, on_click=on_next_click, key="next_button_bottom")
-        ## Autor
-        st.caption("Streamlit book - created by [sebastiandres](https://sebastiandres.xyz) - Nov 2021")    
-    else:
-        # If no button, use the lateral sidebar to navigate
-        # Depth counter, naming convention for content (depending on depth), 
-        # and a wrapper function to call it more easily
-        depth = 1
-        book_convention_dict = {1:"section", 2:"chapter", 3:"subchapter", 4:"content"}
-        book_naming = lambda n: book_convention_dict[min(n, len(book_convention_dict))]
-        # Get the items (files/folders) at path level
-        items_at_path_dict = get_items(path=path)
-        # Provide a select box for user to select, if not an empty list:
-        if len(items_at_path_dict)>0:
-            selected_item = st.sidebar.selectbox(f"Select {book_naming(depth)}:", 
-                                                options=sorted(items_at_path_dict.keys()),
-                                                key=f"select_box_{depth}")
-            item_dict = items_at_path_dict[selected_item]
-            # Depending on selection, render if file or procede recursively
-            while item_dict["type"]!="file" or len(items_at_path_dict)==0:
-                depth += 1
-                items_at_path_dict = get_items(item_dict["path"])
-                # Provide the select box for current items
-                if len(items_at_path_dict)>0:
-                    selected_item = st.sidebar.selectbox(f"Select {book_naming(depth)}:", 
-                                                        options=sorted(items_at_path_dict.keys()),
-                                                        key=f"select_box_{depth}")
-                    item_dict = items_at_path_dict[selected_item]
-                else:
-                    break
-            # Render the file, if we got one!
-            if item_dict["type"]=="file":
-                st.caption(item_dict["path"])
-                render_file(fullpath=item_dict["path"])
-            else:
-                st.warning("Empty folder")
-        ## Autor
-        st.sidebar.caption("[Streamlit book](https://streamlit_book.readthedocs.io/) - [sebastiandres](https://sebastiandres.xyz) - Nov 2021")
+            create_buttons(caption_text, button_previous, button_next, button_refresh, 
+                            username, repository)
+
     return

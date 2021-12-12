@@ -1,8 +1,10 @@
 import streamlit as st
 
 try:
+    from keywords import check_keyword
     from keywords import TODO_KEYWORD, TODO_COMPLETED, TODO_INCOMPLETE, TODO_SUCCESS, SUCCESS
 except:
+    from .keywords import check_keyword
     from .keywords import TODO_KEYWORD, TODO_COMPLETED, TODO_INCOMPLETE, TODO_SUCCESS, SUCCESS
 
 def to_do_list_parser(lines):
@@ -13,6 +15,7 @@ def to_do_list_parser(lines):
     :return: parsed values for tasks, and optionally the header and success message.
     :rtype: dict
     """
+    print("\n".join(lines))
     # Dict to store the parsed values
     parse_dict = {
                     "tasks":{},
@@ -21,7 +24,7 @@ def to_do_list_parser(lines):
                 }
     for i, line in enumerate(lines):
         if i==0:
-            if line.startswith(TODO_KEYWORD):
+            if check_keyword(line, TODO_KEYWORD):
                 continue
             else:
                 break
@@ -40,11 +43,11 @@ def to_do_list_parser(lines):
 
 def to_do_list(tasks, header="", success=TODO_SUCCESS):
     """ Renders the tasks as a to-do list, with optional header and success message.
-    The tasks are a dictionary (supposed to be ordered as Python +3.6) of 
-    tasks and their completed (True) or to-do (False) status as a checkbox.
+    The tasks are a dictionary of tasks (supposed to be ordered as Python +3.6) 
+    with their completed (True) or to-do (False) status as a checkbox.
 
-    :param tasks: collection of tasks to be displayed
-    :type tasks: list of strings
+    :param tasks: dictionary of tasks in format string:bool
+    :type tasks: dict
     :param header: description of the tasks
     :type header: str, optional
     :param success: success message

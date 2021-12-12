@@ -1,9 +1,13 @@
 import streamlit as st
 
 try:
-    from keywords import *
+    from keywords import check_keyword
+    from keywords import SINGLE_CHOICE_KEYWORD, SINGLE_CHOICE_CORRECT, SINGLE_CHOICE_WRONG
+    from keywords import BUTTON, SUCCESS, ERROR, DEFAULT_SUCCESS_MESSAGE, DEFAULT_ERROR_MESSAGE, DEFAULT_BUTTON_MESSAGE
 except:
-    from .keywords import *
+    from .keywords import check_keyword
+    from .keywords import SINGLE_CHOICE_KEYWORD, SINGLE_CHOICE_CORRECT, SINGLE_CHOICE_WRONG, BUTTON, SUCCESS, ERROR
+    from .keywords import BUTTON, SUCCESS, ERROR, DEFAULT_SUCCESS_MESSAGE, DEFAULT_ERROR_MESSAGE, DEFAULT_BUTTON_MESSAGE
 
 def single_choice_parser(lines):
     """Parses a list of lines into a dictionary with the parsed values.
@@ -22,7 +26,7 @@ def single_choice_parser(lines):
     # Iterate through lines and process each line accordingly
     for i, line in enumerate(lines):
         if i==0:
-            if line.startswith(SINGLE_CHOICE_KEYWORD):
+            if check_keyword(line, SINGLE_CHOICE_KEYWORD):
                 continue
             else:
                 break

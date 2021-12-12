@@ -13,9 +13,9 @@ Capabilities
 * Bookmark button - save your last read page!
 * Predefined activities: 
     * to do list 
-    * true-or-false
-    * single-choice
-    * multiple-choice.
+    * true or false question
+    * single choice question
+    * multiple choice question
 * Activities can be defined from plain markdown or from python functions
 
 How does it works?

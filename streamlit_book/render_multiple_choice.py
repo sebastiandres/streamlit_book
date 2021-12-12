@@ -1,10 +1,13 @@
 import streamlit as st
 
 try:
-    from keywords import *
+    from keywords import check_keyword
+    from keywords import MULTIPLE_CHOICE_KEYWORD, MULTIPLE_CHOICE_FALSE, MULTIPLE_CHOICE_TRUE
+    from keywords import BUTTON, SUCCESS, ERROR, DEFAULT_SUCCESS_MESSAGE, DEFAULT_ERROR_MESSAGE, DEFAULT_BUTTON_MESSAGE
 except:
-    from .keywords import *
-
+    from .keywords import check_keyword
+    from .keywords import MULTIPLE_CHOICE_KEYWORD, MULTIPLE_CHOICE_FALSE, MULTIPLE_CHOICE_TRUE
+    from .keywords import BUTTON, SUCCESS, ERROR, DEFAULT_SUCCESS_MESSAGE, DEFAULT_ERROR_MESSAGE, DEFAULT_BUTTON_MESSAGE
 
 def multiple_choice_parser(lines):
     """Parses a list of lines into a dictionary with the parsed values.
@@ -21,8 +24,9 @@ def multiple_choice_parser(lines):
                   }
     # Iterate through lines and process each line accordingly
     for i, line in enumerate(lines):
+        print(line)
         if i==0:
-            if line.startswith(MULTIPLE_CHOICE_KEYWORD):
+            if check_keyword(line, MULTIPLE_CHOICE_KEYWORD):
                 continue
         elif line.startswith(MULTIPLE_CHOICE_TRUE):
             option_text = line[len(MULTIPLE_CHOICE_TRUE):].strip()

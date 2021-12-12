@@ -1,4 +1,4 @@
-stb.single-choice
+stb.single_choice
 Which is the current version of streamlit?
 - 0.0.1
 - 0.5.5

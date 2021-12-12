@@ -4,18 +4,6 @@ Markdown syntax
 The following Markdown syntax should be used to generate
 the desired quiz and activities.
 
-To do list
-----------
-
-.. code-block:: none
-
-    stb.to_do
-    [Optional] Description:
-    [x] task 1
-    [ ] task 1
-    [ ] task 3
-
-
 True or False question
 -----------------------
 
