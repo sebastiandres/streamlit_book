@@ -24,7 +24,6 @@ def multiple_choice_parser(lines):
                   }
     # Iterate through lines and process each line accordingly
     for i, line in enumerate(lines):
-        print(line)
         if i==0:
             if check_keyword(line, MULTIPLE_CHOICE_KEYWORD):
                 continue

@@ -5,7 +5,6 @@ def check_keyword(line, keyword):
     Replaces - for _ for backwards compatibility.
     """
     new_line = line.replace("-", "_")
-    print(new_line)
     return new_line.startswith(keyword)
 
 TODO_KEYWORD = "stb.to_do"

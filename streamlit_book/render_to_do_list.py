@@ -15,7 +15,6 @@ def to_do_list_parser(lines):
     :return: parsed values for tasks, and optionally the header and success message.
     :rtype: dict
     """
-    print("\n".join(lines))
     # Dict to store the parsed values
     parse_dict = {
                     "tasks":{},

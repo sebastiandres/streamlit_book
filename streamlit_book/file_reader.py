@@ -8,14 +8,14 @@ try:
 except:
     from render import render_file
 
-def on_gotopage_click():
+def default_on_gotopage_click():
     st.session_state.toc = False
     return
 
-def on_refresh_click():
+def default_on_refresh_click():
     return
 
-def on_next_click():
+def default_on_next_click():
     """
     Updates the values of update_from_selectbox and update_from_button.
     Updates the page number to +1, or 0 if the last page was reached.
@@ -23,7 +23,7 @@ def on_next_click():
     st.session_state.file_number = (st.session_state.file_number + 1) % st.session_state.total_files
     return
 
-def on_previous_click():
+def default_on_previous_click():
     """
     Updates the values of update_from_selectbox and update_from_button.
     Updates the page number to +1, or 0 if the last page was reached.
@@ -31,7 +31,10 @@ def on_previous_click():
     st.session_state.file_number = (st.session_state.file_number - 1) % st.session_state.total_files
     return
 
-def create_buttons(caption_text, button_previous, button_next, button_refresh, 
+def create_buttons(caption_text, 
+                    button_previous, on_previous_click, 
+                    button_next, on_next_click,
+                    button_refresh, on_refresh_click,
                     username, repository):
     """
     Function to create the navigation buttons
@@ -150,14 +153,17 @@ def get_items(path: str):
             item_dict[render_name] = {"type":"folder", "path":my_item}
     return item_dict
 
-def set_book_config(path: str,
-                    toc: bool=False,    
-                    button: str="top", 
-                    button_previous: str="⬅️",
-                    button_next: str="➡️",
+def set_book_config(path,
+                    toc=False,
+                    button="top", 
+                    button_previous="⬅️",
+                    on_previous_click=default_on_previous_click,
+                    button_next="➡️",
+                    on_next_click=default_on_next_click,
                     button_refresh="🔄",
-                    username: str="",
-                    repository: str=""):
+                    on_refresh_click=default_on_refresh_click,
+                    username="",
+                    repository=""):
     """Sets the book configuration, and displays the selected file.
 
     :param toc: If True, it will display the table of contents for the files on the path.
@@ -166,10 +172,16 @@ def set_book_config(path: str,
     :type button: str
     :param button_previous: icon or text for the previous button.
     :type button_previous: str
+    :param on_previous_click: function to be called when the previous button is clicked.
+    :type on_previous_click: function
     :param button_next: icon or text for the next button.
     :type button_next: str
+    :param on_next_click: function to be called when the next button is clicked.
+    :type on_next_click: function
     :param button_refresh: icon or text for the refresh button.
     :type button_refresh: str
+    :param on_refresh_click: function to be called when the refresh button is clicked.
+    :type on_refresh_click: function
     :param username: GitHub username (for the hits counter).
     :type username: str
     :param repository: GitHub repository (for the hits counter).
@@ -207,11 +219,14 @@ def set_book_config(path: str,
     if st.session_state.toc:
         option = st.radio("Table of contents", options=file_list)
         st.session_state.file_number = file_list.index(option)
-        st.button("Go to page", on_click=on_gotopage_click, key="gotopage")
+        st.button("Go to page", on_click=default_on_gotopage_click, key="gotopage")
     else:
         # If required, put the button on top of the page. Use columns for alignment
         if button=="top":
-            create_buttons(caption_text, button_previous, button_next, button_refresh, 
+            create_buttons(caption_text, 
+                            button_previous, on_previous_click, 
+                            button_next, on_next_click,
+                            button_refresh, on_refresh_click,
                             username, repository)
 
         # Render the file using the magic
