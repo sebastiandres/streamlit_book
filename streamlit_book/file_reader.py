@@ -8,14 +8,14 @@ try:
 except:
     from render import render_file
 
-def default_on_gotopage_click():
+def on_gotopage_click():
     st.session_state.toc = False
     return
 
-def default_on_refresh_click():
+def on_refresh_click():
     return
 
-def default_on_next_click():
+def on_next_click():
     """
     Updates the values of update_from_selectbox and update_from_button.
     Updates the page number to +1, or 0 if the last page was reached.
@@ -23,7 +23,7 @@ def default_on_next_click():
     st.session_state.file_number = (st.session_state.file_number + 1) % st.session_state.total_files
     return
 
-def default_on_previous_click():
+def on_previous_click():
     """
     Updates the values of update_from_selectbox and update_from_button.
     Updates the page number to +1, or 0 if the last page was reached.
@@ -32,15 +32,21 @@ def default_on_previous_click():
     return
 
 def create_buttons(caption_text, 
-                    button_previous, on_previous_click, 
-                    button_next, on_next_click,
-                    button_refresh, on_refresh_click,
+                    button_previous, 
+                    button_next, 
+                    button_refresh,
                     username, repository):
     """
     Function to create the navigation buttons
     """
     st.caption(caption_text)
-    c1, c2, c3, c4 = st.columns([1, 1, 1, 10])
+    p = len(button_previous)
+    n = len(button_next)
+    r = len(button_refresh)
+    b = max(p,n,r)
+    # Dinamic resizing based on length of the button names
+    # Would be even better if layout type was known
+    c1, c2, c3, c4 = st.columns([b, b, b, max(b, 20-3*b)])
     c1.button(button_previous, 
                 help="Previous page", on_click=on_previous_click, key="previous_button_top")
     c2.button(button_next, 
@@ -157,11 +163,10 @@ def set_book_config(path,
                     toc=False,
                     button="top", 
                     button_previous="⬅️",
-                    on_previous_click=default_on_previous_click,
                     button_next="➡️",
-                    on_next_click=default_on_next_click,
                     button_refresh="🔄",
-                    on_refresh_click=default_on_refresh_click,
+                    on_load_header=None,
+                    on_load_footer=None,
                     username="",
                     repository=""):
     """Sets the book configuration, and displays the selected file.
@@ -172,16 +177,14 @@ def set_book_config(path,
     :type button: str
     :param button_previous: icon or text for the previous button.
     :type button_previous: str
-    :param on_previous_click: function to be called when the previous button is clicked.
-    :type on_previous_click: function
     :param button_next: icon or text for the next button.
     :type button_next: str
-    :param on_next_click: function to be called when the next button is clicked.
-    :type on_next_click: function
     :param button_refresh: icon or text for the refresh button.
     :type button_refresh: str
-    :param on_refresh_click: function to be called when the refresh button is clicked.
-    :type on_refresh_click: function
+    :param on_load_header: function to be called before the page is loaded.
+    :type on_load_header: function
+    :param on_load_footer: function to be called after the page is loaded.
+    :type on_load_footer: function
     :param username: GitHub username (for the hits counter).
     :type username: str
     :param repository: GitHub repository (for the hits counter).
@@ -189,8 +192,10 @@ def set_book_config(path,
     :return: None
     """
 
+    print(button_previous, len(button_previous))
+    print(button_next, len(button_next))
+    print(button_refresh, len(button_refresh))
     # Parameters: File number goes from 0 to n-1.
-    #from IPython import embed; embed()
  
     # Sanitize the path
     if path.endswith("/"):
@@ -219,14 +224,16 @@ def set_book_config(path,
     if st.session_state.toc:
         option = st.radio("Table of contents", options=file_list)
         st.session_state.file_number = file_list.index(option)
-        st.button("Go to page", on_click=default_on_gotopage_click, key="gotopage")
+        st.button("Go to page", on_click=on_gotopage_click, key="gotopage")
     else:
+        # Execute the on_load_header function
+        if on_load_header:
+            on_load_header()
+
         # If required, put the button on top of the page. Use columns for alignment
         if button=="top":
             create_buttons(caption_text, 
-                            button_previous, on_previous_click, 
-                            button_next, on_next_click,
-                            button_refresh, on_refresh_click,
+                            button_previous, button_next, button_refresh,
                             username, repository)
 
         # Render the file using the magic
@@ -240,4 +247,7 @@ def set_book_config(path,
             create_buttons(caption_text, button_previous, button_next, button_refresh, 
                             username, repository)
 
+        # Execute the on_load_footer function
+        if on_load_footer:
+            on_load_footer()
     return
