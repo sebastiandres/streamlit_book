@@ -35,21 +35,22 @@ def render_file(fullpath):
             valid_chuncks = [c for c in clean_chuncks if len(c)>0]
             for chunck in valid_chuncks:
                 lines = chunck.split("\n")
-                if check_keyword(lines[0], TODO_KEYWORD):
+                first_line = lines[0]
+                if check_keyword(first_line, TODO_KEYWORD):
                     to_do_list_from_lines(lines)
-                elif check_keyword(lines[0], TRUE_FALSE_KEYWORD):
+                elif check_keyword(first_line, TRUE_FALSE_KEYWORD):
                     true_or_false_from_lines(lines)
-                elif check_keyword(lines[0], MULTIPLE_CHOICE_KEYWORD):
+                elif check_keyword(first_line, MULTIPLE_CHOICE_KEYWORD):
                     multiple_choice_from_lines(lines)
-                elif check_keyword(lines[0], SINGLE_CHOICE_KEYWORD):
+                elif check_keyword(first_line, SINGLE_CHOICE_KEYWORD):
                     single_choice_from_lines(lines)
-                elif check_keyword(lines[0], CODE_INPUT_KEYWORD):
+                elif check_keyword(first_line, CODE_INPUT_KEYWORD):
                     code_input_from_lines(lines)
-                elif check_keyword(lines[0], TEXT_INPUT_KEYWORD):
+                elif check_keyword(first_line, TEXT_INPUT_KEYWORD):
                     text_input_from_lines(lines)
-                elif check_keyword(lines[0], FILE_UPLOAD_KEYWORD):
+                elif check_keyword(first_line, FILE_UPLOAD_KEYWORD):
                     file_upload_from_lines(lines)
                 else:
-                    st.markdown("".join(lines), unsafe_allow_html=True)
+                    st.markdown(chunck, unsafe_allow_html=True)
         else:
             st.warning("File not supported")

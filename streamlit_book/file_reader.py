@@ -192,9 +192,6 @@ def set_book_config(path,
     :return: None
     """
 
-    print(button_previous, len(button_previous))
-    print(button_next, len(button_next))
-    print(button_refresh, len(button_refresh))
     # Parameters: File number goes from 0 to n-1.
  
     # Sanitize the path
@@ -231,7 +228,7 @@ def set_book_config(path,
             on_load_header()
 
         # If required, put the button on top of the page. Use columns for alignment
-        if button=="top":
+        if button in ["top", "both"]:
             create_buttons(caption_text, 
                             button_previous, button_next, button_refresh,
                             username, repository)
@@ -243,7 +240,7 @@ def set_book_config(path,
             st.exception(e)
 
         # If required, put the button on the bottom of the page. Use columns for alignment
-        if button=="bottom":
+        if button in ["bottom", "both"]:
             create_buttons(caption_text, button_previous, button_next, button_refresh, 
                             username, repository)
 
