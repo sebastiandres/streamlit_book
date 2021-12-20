@@ -35,7 +35,7 @@ def create_buttons(caption_text,
                     button_previous, 
                     button_next, 
                     button_refresh,
-                    username, repository):
+                    username, repository, key=""):
     """
     Function to create the navigation buttons
     """
@@ -48,11 +48,11 @@ def create_buttons(caption_text,
     # Would be even better if layout type was known
     c1, c2, c3, c4 = st.columns([b, b, b, max(b, 20-3*b)])
     c1.button(button_previous, 
-                help="Previous page", on_click=on_previous_click, key="previous_button_top")
+                help="Previous page", on_click=on_previous_click, key="previous_button_top"+key)
     c2.button(button_next, 
-                help="Next page", on_click=on_next_click, key="next_button_top")
+                help="Next page", on_click=on_next_click, key="next_button_top"+key)
     c3.button(button_refresh, 
-                help="Refresh current page", on_click=on_refresh_click, key="switch_button_top")
+                help="Refresh current page", on_click=on_refresh_click, key="switch_button_top"+key)
     if len(username+repository) > 0:
         c4.markdown(f"[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FP{username}%2F{repository}&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)",
                     unsafe_allow_html=True)
@@ -231,7 +231,7 @@ def set_book_config(path,
         if button in ["top", "both"]:
             create_buttons(caption_text, 
                             button_previous, button_next, button_refresh,
-                            username, repository)
+                            username, repository, key="top")
 
         # Render the file using the magic
         try:
@@ -242,7 +242,7 @@ def set_book_config(path,
         # If required, put the button on the bottom of the page. Use columns for alignment
         if button in ["bottom", "both"]:
             create_buttons(caption_text, button_previous, button_next, button_refresh, 
-                            username, repository)
+                            username, repository, key="bottom")
 
         # Execute the on_load_footer function
         if on_load_footer:

@@ -17,7 +17,8 @@ def footer_test():
     st.caption("Footer")
     st.balloons()
 
-stb.set_book_config(path="tests", #toc=True, 
+stb.set_book_config(path="tests", #toc=True,
+                    button="both",
                     username="sebastiandres", repository="streamlit-book",
                     #button_previous="Previous Page", button_next="Next Page", button_refresh="Refresh Page",
                     on_load_header=header_test,
