@@ -22,3 +22,4 @@ There are a couple of examples where you can try the library:
    true_or_false
    single_choice
    multiple_choice
+   share

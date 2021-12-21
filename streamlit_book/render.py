@@ -9,6 +9,7 @@ try:
     from render_text_input import text_input_from_lines
     from render_code_input import code_input_from_lines
     from render_file_upload import file_upload_from_lines
+    from social_media import share_from_lines
 except:
     from .keywords import *
     from .render_to_do_list import to_do_list_from_lines
@@ -18,6 +19,7 @@ except:
     from .render_text_input import text_input_from_lines
     from .render_code_input import code_input_from_lines
     from .render_file_upload import file_upload_from_lines
+    from .social_media import share_from_lines
 
 def render_file(fullpath):
     """
@@ -50,6 +52,8 @@ def render_file(fullpath):
                     text_input_from_lines(lines)
                 elif check_keyword(first_line, FILE_UPLOAD_KEYWORD):
                     file_upload_from_lines(lines)
+                elif check_keyword(first_line, SHARE_KEYWORD):
+                    share_from_lines(lines)
                 else:
                     st.markdown(chunck, unsafe_allow_html=True)
         else:

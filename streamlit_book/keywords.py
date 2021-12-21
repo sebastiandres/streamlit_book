@@ -28,6 +28,8 @@ CODE_INPUT_KEYWORD = "stb.code_input"
 
 FILE_UPLOAD_KEYWORD = "stb.file_upload"
 
+SHARE_KEYWORD = "stb.share"
+
 BUTTON = "button:"
 DEFAULT_BUTTON_MESSAGE = "Check answer"
 SUCCESS = "success:"

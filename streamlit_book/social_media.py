@@ -1,16 +1,58 @@
 from streamlit.components.v1 import html
 
-def share(my_url, my_text):
+try:
+    from keywords import SHARE_KEYWORD 
+    from keywords import check_keyword
+except:
+    from .keywords import SHARE_KEYWORD 
+    from .keywords import check_keyword
+
+def share_parser(lines):
+    """Parses a list of lines into a dictionary with the parsed values.
+
+    :param lines: list of lines
+    :type lines: list
+    :return: parsed values for text and url
+    :rtype: dict
+    """
+    # Dict to store the parsed values
+    parse_dict = {
+                    "my_text":"",
+                    "my_url":"",
+                }
+    for i, line in enumerate(lines):
+        if i==0:
+            if check_keyword(line, SHARE_KEYWORD):
+                continue
+            else:
+                break
+        elif i==1:
+            parse_dict["my_text"] = line.strip()
+        elif i==2:
+            parse_dict["my_url"] = line.strip()
+    return parse_dict
+
+def share_from_lines(lines):
+    """Renders the share buttons from a list of lines.
+
+    :param lines: list of lines
+    :type lines: list
+    :return: None
+    """
+    parse_dict = share_parser(lines)
+    share(my_text=parse_dict["my_text"], 
+            my_url=parse_dict["my_url"], )
+    return
+
+def share(my_text, my_url):
     """
     This function takes a url and a text and displays
     clickable sharing buttons in html.
-    This is based on https://sharingbuttons.io/
-    By large the simplest and best way to share the content. Kudos to creator.
 
-    :param my_url: the url to share on social media
-    :type my_url: str
     :param my_text: the text to share on social media
     :type my_text: str
+    :param my_url: the url to share on social media
+    :type my_url: str
     """
 
     # Define the css style for the sharing buttons
