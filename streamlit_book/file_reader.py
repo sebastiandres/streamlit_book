@@ -202,6 +202,10 @@ def set_book_config(path,
     if "toc" not in st.session_state:
         st.session_state.toc = toc
 
+    # Save button configuration
+    if "button" not in st.session_state:
+        st.session_state.button = button
+
     # Initialize the session state variables
     if "file_number" not in st.session_state:
         st.session_state.file_number = 0
@@ -228,7 +232,7 @@ def set_book_config(path,
             on_load_header()
 
         # If required, put the button on top of the page. Use columns for alignment
-        if button in ["top", "both"]:
+        if st.session_state.button in ["top", "both"]:
             create_buttons(caption_text, 
                             button_previous, button_next, button_refresh,
                             username, repository, key="top")
@@ -240,7 +244,7 @@ def set_book_config(path,
             st.exception(e)
 
         # If required, put the button on the bottom of the page. Use columns for alignment
-        if button in ["bottom", "both"]:
+        if st.session_state.button in ["bottom", "both"]:
             create_buttons(caption_text, button_previous, button_next, button_refresh, 
                             username, repository, key="bottom")
 
