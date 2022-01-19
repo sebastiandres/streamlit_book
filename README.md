@@ -12,6 +12,7 @@ All the documentation is at [readthedocs](https://streamlit_book.readthedocs.io/
 
 * [Streamlit Book Examples](https://share.streamlit.io/sebastiandres/streamlit_book_examples/main/book.py): Several different examples.
 * [Happy Birds](https://share.streamlit.io/sebastiandres/streamlit_happy_birds/main/happy_birds.py): A small explanation on trajectory motion.
+* [The (confusion) matrix](https://share.streamlit.io/sebastiandres/ml-edu-1-confusion-matrix/main): A simple example of confusion matrix with cool graphics and animation on Streamlit.
 
 ## How to use it
 
