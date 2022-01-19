@@ -1,5 +1,7 @@
 # streamlit_book
 
+[![Open in Streamlit][share_badge]][share_link]
+
 `streamlit_book` is a streamlit companion library, written in python+streamlit to create a interactive reader for the content on a given folder. It was developed on November 2021 during streamlit's hackathon - ended up being awarded one of the two best apps!
 
 ## Documentation
@@ -31,3 +33,6 @@ st.set_page_config(layout="wide", page_title="My page title")
 # Streamit book properties
 stb.set_book_config(path="my/path")
 ```
+
+[share_badge]: https://static.streamlit.io/badges/streamlit_badge_black_white.svg
+[share_link]: https://share.streamlit.io/sebastiandres/streamlit_happy_birds/main/happy_birds.py
