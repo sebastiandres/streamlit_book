@@ -3,11 +3,11 @@ import pathlib
 from setuptools import find_packages, setup
 
 # VERSION - is a variable that is defined in the __init__.py file
-VERSION = "0.5.2"
+VERSION = "0.5.3"
 
 HERE = pathlib.Path(__file__).parent
 PACKAGE_NAME = 'streamlit_book' #Debe coincidir con el nombre de la carpeta 
-AUTHOR = 'Sebastian Flores Benner'
+AUTHOR = 'Sebastián Flores Benner'
 AUTHOR_EMAIL = 'sebastiandres@gmail.com'
 URL = 'https://github.com/sebastiandres/streamlit_book'
 

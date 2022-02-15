@@ -8,16 +8,18 @@ st.set_page_config(layout="wide", page_title="Tests")
 #stb.set_book_config(path="tests", button="top")
 
 def header_test():
-    st.title("Header")
-    st.balloons()
+    st.caption("Header")
+    #st.balloons()
     st.markdown("---")
 
 def footer_test():
     st.markdown("---")
     st.caption("Footer")
-    st.balloons()
+    #st.balloons()
 
-stb.set_book_config(path="tests", #toc=True,
+stb.set_book_config(path="tests", 
+                    book_id="tests", 
+                    #toc=True,
                     button="bottom",
                     username="sebastiandres", repository="streamlit-book",
                     #button_previous="Previous Page", button_next="Next Page", button_refresh="Refresh Page",

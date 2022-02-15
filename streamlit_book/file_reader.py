@@ -8,6 +8,17 @@ try:
 except:
     from render import render_file
 
+def update_page():
+    """
+    Updates the url with the queries for the page based on the file_number.
+    If the book_catalog has more than one book, includes the book name on the query parameters.
+    """   
+    query_params = {"page": st.session_state.file_number}
+    if len(st.session_state.path_dict) >= 2:
+        query_params["book"] = st.session_state.active_book
+    st.experimental_set_query_params(**query_params)
+    return
+
 def on_gotopage_click():
     st.session_state.toc = False
     return
@@ -21,6 +32,7 @@ def on_next_click():
     Updates the page number to +1, or 0 if the last page was reached.
     """
     st.session_state.file_number = (st.session_state.file_number + 1) % st.session_state.total_files
+    update_page()
     return
 
 def on_previous_click():
@@ -29,6 +41,7 @@ def on_previous_click():
     Updates the page number to +1, or 0 if the last page was reached.
     """
     st.session_state.file_number = (st.session_state.file_number - 1) % st.session_state.total_files
+    update_page()
     return
 
 def create_buttons(caption_text, 
@@ -58,7 +71,7 @@ def create_buttons(caption_text,
                     unsafe_allow_html=True)
     return
 
-def get_all_files(path: str):
+def get_all_files():
     """
     Returns a list of all files (python, markdown) in the given path, 
     considering recursively all subfolders.
@@ -66,6 +79,8 @@ def get_all_files(path: str):
     Excludes files and folders starting with WIP (work in progress).
     It stores the total number of files (pages) in the session_state.
     """
+    active_book = st.session_state.active_book
+    path = st.session_state.path_dict[active_book]
     py_files = glob(f"{path}/**/*.py", recursive=True)
     md_files = glob(f"{path}/**/*.md", recursive=True)
     all_files = [_ for _ in sorted(py_files + md_files) if "/WIP" not in _]
@@ -159,9 +174,9 @@ def get_items(path: str):
             item_dict[render_name] = {"type":"folder", "path":my_item}
     return item_dict
 
-def set_book_config(path,
+def set_book_config(path="pages",
                     toc=False,
-                    button="top", 
+                    button="top",
                     button_previous="⬅️",
                     button_next="➡️",
                     button_refresh="🔄",
@@ -171,7 +186,9 @@ def set_book_config(path,
                     repository=""):
     """Sets the book configuration, and displays the selected file.
 
-    :param toc: If True, it will display the table of contents for the files on the path.
+    :param path: The path to root directory of the the files (py or md) to be rendered as pages of the book. Can be a string (as in path="pages") or a dict with names for different books as in path={"book1":"pages_book1", "book2":"pages_book2"}.
+    :type path: string, dict
+    :param toc: If True, it will display the table of contents for the files on the path. Defaults to False.
     :type toc: bool
     :param button: "top" (default behavior) or "bottom".
     :type button: str
@@ -191,12 +208,48 @@ def set_book_config(path,
     :type repository: str
     :return: None
     """
-
-    # Parameters: File number goes from 0 to n-1.
+    # Observation: File number goes from 0 to n-1.
  
-    # Sanitize the path
-    if path.endswith("/"):
-        path = path[:-1]
+    # Process the path, depending on the type
+    ## For a string
+    if type(path) is str:
+        # Convert to dict of 1 book
+        path = {book: path}
+    ## For a dict
+    if type(path) is dict:
+        # Process the path for each book
+        clean_path = {}
+        for book_name, book_path in path.items():
+            clean_book_name = book_name.replace(" ", "_")
+            clean_book_path = book_path
+        st.session_state.path_dict = path
+    else:
+        raise ValueError("The path must be a string or a dict.")
+        return
+
+    # Define current active book:
+    # Get the query parameters (if any)
+    query_params = st.experimental_get_query_params()
+    # If a valid book is provided by the query, use it. Otherwise, use the first defined one.
+    first_book = list(st.session_state.path_dict.keys())[0]
+    if "book" in query_params:     
+        query_book = query_params["book"][0] # The first book, always a list.
+        if query_book in st.session_state.path_dict.keys():
+            st.session_state.active_book = query_book
+        else:
+            st.error("The book you selected does not exist. Redirecting to first valid book")
+            st.session_state.active_book = first_book
+    else:
+        if "active_book" not in st.session_state:
+            st.session_state.active_book = first_book
+
+    # Get the files at path level (only files, not folders)
+    file_list = get_all_files()
+
+    # Check that we have at least 1 file to render
+    if len(file_list) == 0:
+        st.error(f"No files were found at the given path. Please check the provided path: {path}")
+        return
 
     # Initialize the session state variables
     if "toc" not in st.session_state:
@@ -206,17 +259,21 @@ def set_book_config(path,
     if "button" not in st.session_state:
         st.session_state.button = button
 
-    # Initialize the session state variables
-    if "file_number" not in st.session_state:
+    # Page number
+    query_parameters = st.experimental_get_query_params()
+    if "page" in query_parameters:
+        page = int(query_parameters["page"][0]) # Get the first of all provided values
+        page_in_range = min(max(page, 0), len(file_list)-1)
+        if page_in_range != page:
+            st.error(f"The page number {page} is out of range. Redirected to initial page.")
+            st.session_state.file_number = page_in_range
+            update_page()
+        else:
+            st.session_state.file_number = page_in_range
+    else:
+        # if page not in query params, send to the correct page
         st.session_state.file_number = 0
-
-    # Get the files at path level (only files, not folders)
-    file_list = get_all_files(path)
-
-    # Check that we have at least 1 file to render
-    if len(file_list) == 0:
-        st.error(f"No files were found at the given path. Please check the provided path: {path}")
-        return
+        update_page()
 
     # Update file_fullpath
     selected_file_fullpath = file_list[st.session_state.file_number]
