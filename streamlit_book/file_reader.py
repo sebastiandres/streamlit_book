@@ -37,8 +37,13 @@ def create_buttons(caption_text,
                     button_refresh,
                     key=""):
     """
-    Function to create the navigation buttons
+    Function to create the navigation buttons.
+    Only applies if more than 1 file is to be rendered.
     """
+    # Skip if there is only one file
+    if st.session_state.total_files <= 1:
+        return
+    # We have at least 2 files, so render the buttons
     st.caption(caption_text)
     p = len(button_previous)
     n = len(button_next)
@@ -59,12 +64,19 @@ def get_all_files(path):
     """
     Returns a list of all files (python, markdown) in the given path, 
     considering recursively all subfolders.
+    The path can be a single file.
     It does not considers folders.
     Excludes files and folders starting with WIP (work in progress).
     It stores the total number of files (pages) in the session_state.
     """
-    py_files = glob(f"{path}/**/*.py", recursive=True)
-    md_files = glob(f"{path}/**/*.md", recursive=True)
+    if path.endswith(".py"):
+        py_files = [ path, ]
+    else:
+        py_files = glob(f"{path}/**/*.py", recursive=True)
+    if path.endswith(".md"):
+        md_files = [ path, ]
+    else:
+        md_files = glob(f"{path}/**/*.md", recursive=True)
     all_files = [_ for _ in sorted(py_files + md_files) if "/WIP" not in _]
     st.session_state.total_files = len(all_files)
     return all_files
