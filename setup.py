@@ -21,7 +21,7 @@ PROJECT_URLS = {
                 'Tracker': 'https://github.com/sebastiandres/streamlit_book/issues',
                 }
 # Libraries required by the package
-INSTALL_REQUIRES = ['streamlit']
+INSTALL_REQUIRES = ['streamlit', 'streamlit-option-menu']
 
 setup(
     name=PACKAGE_NAME,

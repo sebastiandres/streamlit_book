@@ -6,6 +6,7 @@ sys.path.insert(0, os.path.abspath('.'))
 try:
     ### The main function to be used to read the files
     from file_reader import set_book_config
+    from file_reader import set_library_config
     # Some additional interesting functions
     from render_true_or_false import true_or_false
     from render_to_do_list import to_do_list
@@ -18,6 +19,7 @@ try:
 except:
     ### The main function to be used to read the files
     from .file_reader import set_book_config
+    from .file_reader import set_library_config
     # Some additional interesting functions
     from .render_true_or_false import true_or_false
     from .render_to_do_list import to_do_list
