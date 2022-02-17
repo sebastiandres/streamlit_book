@@ -166,7 +166,7 @@ def set_book_config(path="pages",
                     on_load_footer=None):
     """Sets the book configuration, and displays the selected file.
 
-    :param path: The path to root directory of the the files (py or md) to be rendered as pages of the book. Can be a string (as in path="pages") or a dict with names for different books as in path={"book1":"pages_book1", "book2":"pages_book2"}.
+    :param path: The path to root directory of the the files (py or md) to be rendered as pages of the book. 
     :type path: string, dict
     :param toc: If True, it will display the table of contents for the files on the path. Defaults to False.
     :type toc: bool
