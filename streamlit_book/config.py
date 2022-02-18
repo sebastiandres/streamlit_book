@@ -136,7 +136,10 @@ def set_library_config(options, paths,
                         menu_icon="book", 
                         icons=None, 
                         orientation=None, 
-                        styles=None):
+                        styles=None,
+                        user_login=False,
+                        save_answers=False
+                        ):
     """Creates a list of books using the streamlit_option_menu library.
     Renders the book based on the selection.
     Uses the same configurations used by streamlit-option-menu 
@@ -191,4 +194,4 @@ def set_library_config(options, paths,
         st.session_state.page_number = 0
         
     # Launch the corresponding book
-    set_book_config(path=paths[selected_book_number])
+    set_book_config(path=paths[selected_book_number], user_login=user_login, save_answers=save_answers)
