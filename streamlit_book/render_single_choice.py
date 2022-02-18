@@ -4,10 +4,12 @@ try:
     from keywords import check_keyword
     from keywords import SINGLE_CHOICE_KEYWORD, SINGLE_CHOICE_CORRECT, SINGLE_CHOICE_WRONG
     from keywords import BUTTON, SUCCESS, ERROR, DEFAULT_SUCCESS_MESSAGE, DEFAULT_ERROR_MESSAGE, DEFAULT_BUTTON_MESSAGE
+    from answers import save_answer
 except:
     from .keywords import check_keyword
     from .keywords import SINGLE_CHOICE_KEYWORD, SINGLE_CHOICE_CORRECT, SINGLE_CHOICE_WRONG, BUTTON, SUCCESS, ERROR
     from .keywords import BUTTON, SUCCESS, ERROR, DEFAULT_SUCCESS_MESSAGE, DEFAULT_ERROR_MESSAGE, DEFAULT_BUTTON_MESSAGE
+    from .answers import save_answer
 
 def single_choice_parser(lines):
     """Parses a list of lines into a dictionary with the parsed values.
@@ -85,10 +87,16 @@ def single_choice(question, options, answer_index,
         # Check if correct answer
         key = ("single-choice:" + question + "".join(options)).lower().replace(" ", "_")
         if st.button(button, key=key):
+            # Check ansers
             if options.index(user_answer) == answer_index:
                 st.success(success)
+                is_correct = True
             else:
                 st.error(error)
+                is_correct = False
+        # Save the answers, if required
+            if st.session_state.save_answers:
+                save_answer(question, is_correct=is_correct, user_answer=user_answer, correct_answer=options[answer_index])
         return True
 
 

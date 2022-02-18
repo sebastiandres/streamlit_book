@@ -4,10 +4,12 @@ try:
     from keywords import check_keyword
     from keywords import MULTIPLE_CHOICE_KEYWORD, MULTIPLE_CHOICE_FALSE, MULTIPLE_CHOICE_TRUE
     from keywords import BUTTON, SUCCESS, ERROR, DEFAULT_SUCCESS_MESSAGE, DEFAULT_ERROR_MESSAGE, DEFAULT_BUTTON_MESSAGE
+    from answers import save_answer
 except:
     from .keywords import check_keyword
     from .keywords import MULTIPLE_CHOICE_KEYWORD, MULTIPLE_CHOICE_FALSE, MULTIPLE_CHOICE_TRUE
     from .keywords import BUTTON, SUCCESS, ERROR, DEFAULT_SUCCESS_MESSAGE, DEFAULT_ERROR_MESSAGE, DEFAULT_BUTTON_MESSAGE
+    from .answers import save_answer
 
 def multiple_choice_parser(lines):
     """Parses a list of lines into a dictionary with the parsed values.
@@ -88,10 +90,18 @@ def multiple_choice(question, options_dict,
         # Check if the correct checkboxes are checked
         key = ("multiple-choice:" + question + "".join(options_dict.keys())).lower().replace(" ", "_")
         if st.button(button, key=key):
+            # Check answers
             if all(u==a for u, a in zip(cb_list, options_dict.values())):
                 st.success(success)
+                is_correct = True
             else:
                 st.error(error)
+                is_correct = False
+            # Save the answers, if required
+            if st.session_state.save_answers:                
+                user_answer = [list(options_dict.keys())[i] for i, cb in enumerate(cb_list) if cb]
+                correct_answer = [key for key, val in options_dict.items() if val]
+                save_answer(question, is_correct=is_correct, user_answer=user_answer, correct_answer=correct_answer)
         return True
 
 def multiple_choice_from_lines(lines):
