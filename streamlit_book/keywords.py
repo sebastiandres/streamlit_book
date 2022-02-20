@@ -43,3 +43,6 @@ STARTS_WITH = "starts_with:"
 ENDS_WITH = "ends_with:"
 
 ASSERT = "assert:"
+
+USERS_FILENAME = "./tmp/users.csv"
+ANSWER_FILENAME = "./tmp/answers.csv"

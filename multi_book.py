@@ -5,8 +5,7 @@ import streamlit_book as stb
 st.set_page_config(layout="wide", page_title="Streamlit Book", page_icon="📖",)
 
 c1, c2, c3 = st.columns(3)
-user_login = c1.checkbox("Login", False)
-save_answers = c2.checkbox("Save answers", False)
+save_answers = True
 
 # Streamit book properties
 stb.set_library_config(menu_title="",
@@ -39,6 +38,5 @@ stb.set_library_config(menu_title="",
                               "apple",
                               "tree",
                               ],
-                       user_login=user_login,
                        save_answers=save_answers,
                        )

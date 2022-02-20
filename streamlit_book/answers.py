@@ -1,19 +1,13 @@
-from datetime import datetime
 import streamlit as st
 import subprocess
 import os
 
-ANSWER_FILENAME = "./tmp/answers.csv"
+try:
+    from helpers import get_datetime_string, get_git_revision_short_hash
+except: 
+    from .helpers import get_datetime_string, get_git_revision_short_hash
 
-def get_git_revision_short_hash() -> str:
-    """"
-    Improved upon version found at 
-    https://stackoverflow.com/questions/14989858/get-the-current-git-hash-in-a-python-script/21901260#21901260"
-    """
-    try:
-        return subprocess.check_output(['git', 'rev-parse', '--short', 'HEAD']).decode('ascii').strip()
-    except:
-        return "not_git"
+ANSWER_FILENAME = "./tmp/answers.csv"
 
 def create_answer_file():
     if not os.path.exists(ANSWER_FILENAME):
@@ -25,11 +19,10 @@ def save_answer(question, is_correct, user_answer, correct_answer):
     """
     Save the answer to the question.
     """
-    print(os.path.abspath((ANSWER_FILENAME)))
+    # Parameters
     create_answer_file()
     commit_hash = st.session_state.commit_hash
-    # datetime object containing current date and time
-    dt_string = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    dt_string = get_datetime_string()
     user_id = st.session_state.user_id
     # Clean question and answers
     question = question.replace("\n", "\\n")

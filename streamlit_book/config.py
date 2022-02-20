@@ -4,16 +4,21 @@ from glob import glob
 import os
 import pandas as pd
 
-from .render import render_file
+from .admin import admin_page
+    
 try:
-    from .file_reader import * # change later
-    from .login import *
+    #from .file_reader import *
+    #from .login import *
+    from .admin import admin_page
     from .answers import get_git_revision_short_hash
+    from .render import render_file
 except:
+    #from file_reader import *
+    #from login import *
     #from render import render_file
-    from file_reader import * # change later
-    from login import *
+    from admin import admin_page
     from answers import get_git_revision_short_hash
+    from render import render_file
 
 def set_book_config(path="pages",
                     toc=False,
@@ -23,7 +28,6 @@ def set_book_config(path="pages",
                     button_refresh="🔄",
                     on_load_header=None,
                     on_load_footer=None,
-                    user_login=False,
                     save_answers=False,
                     ):
     """Sets the book configuration, and displays the selected file.
@@ -44,38 +48,67 @@ def set_book_config(path="pages",
     :type on_load_header: function
     :param on_load_footer: function to be called after the page is loaded.
     :type on_load_footer: function
+    :param save_answers: If True, it will save the answers in a csv file. Defaults to False.
+    :type save_answers: bool
     :return: None
     """
     # Observation: File number goes from 0 to n-1.
 
-    # Save login and answers behavior
-    if "user_login" not in st.session_state:
-        st.session_state.user_login = user_login
+    # Store the parameters
     if "save_answers" not in st.session_state:
         st.session_state.save_answers = save_answers
+    if "commit_hash" not in st.session_state:
+        st.session_state.commit_hash =  get_git_revision_short_hash()
 
     # Admin Login: if requested by the user on the url, it redirects to a specific amin page
     # Never shows the content, it will stay on the admin page.
     query_params = st.experimental_get_query_params()
     if "user" in query_params and "admin" in query_params["user"]:
+        # Here we handle everything related to the admin
         admin_page()
-        return
+        return # Don't show anything else!
 
-    # User login, if requested
-    if user_login and ("password_correct" not in st.session_state or not st.session_state["password_correct"]):
-        user_login_page()
-        return
+    # User login
+    query_params = st.experimental_get_query_params()
+    if "token" in query_params:
+        # Here we must handle the user session
+        token = query_params["token"][0] #Just consider the first one
+        ## If the token is wrong, show a special page (only)
+        user_id = get_user_from_token(token)
+        st.session_state.user_id = user_id
+        if user_id is None:
+            # Wrong token
+            st.markdown("Wrong token!")
+            user_id, token = create_new_user_and_token()
+            query_parameters = {"token": token}
+            def on_click():
+                st.experimental_set_query_params(**query_parameters)
+            if st.button("Go back to the main page?", on_click=on_click):
+                st.warning("You will be redirected to the main page.")
+            return
+    else:
+        # token not in query params
+        if "user_id" not in st.session_state:
+            # No user logged in, get user_id and token to redirect
+            user_id, token = create_new_user_and_token()
+            st.session_state.user_id = user_id
+        else:
+            # We know the user_id, so we can get the token and reroute
+            token = get_token_from_user(st.session_state.user_id)
+        query_parameters = {"token": token}
+        st.experimental_set_query_params(**query_parameters)
 
-
-    # Get commit_hash
-    if "commit_hash" not in st.session_state:
-        st.session_state.commit_hash =  get_git_revision_short_hash()
-
-    # Get user_id
-    if "user_id" not in st.session_state:
-        st.session_state.user_id = get_current_user_id()
-    #st.experimental_show(st.session_state.user_id)
-
+    # Save and answers behavior
+    if st.session_state.save_answers:
+        if "warned_about_save_answers" not in st.session_state:
+            def on_click():
+                st.session_state.warned_about_save_answers = True
+            c1, c2 = st.columns([8,1])
+            c1.warning("Your answers will be saved.\n\nYou can relaunch the app using the custom url.")
+            c2.markdown("\n\n")
+            c2.markdown("\n\n")
+            c2.button("Dismiss", on_click=on_click)
+            
     # Get the files at path level (only files, not folders)
     file_list = get_all_files(path)
 
@@ -137,7 +170,6 @@ def set_library_config(options, paths,
                         icons=None, 
                         orientation=None, 
                         styles=None,
-                        user_login=False,
                         save_answers=False
                         ):
     """Creates a list of books using the streamlit_option_menu library.
@@ -160,6 +192,9 @@ def set_library_config(options, paths,
     :type orientation: str
     :param styles: Styles to be used. See the documentation of streamlit_option_menu.
     :type styles: dict
+    :param save_answers: If True, it will save the answers in a csv file. Defaults to False.
+    :type save_answers: bool
+    :return: None
     """
     from streamlit_option_menu import option_menu
 
@@ -194,4 +229,4 @@ def set_library_config(options, paths,
         st.session_state.page_number = 0
         
     # Launch the corresponding book
-    set_book_config(path=paths[selected_book_number], user_login=user_login, save_answers=save_answers)
+    set_book_config(path=paths[selected_book_number], save_answers=save_answers)
