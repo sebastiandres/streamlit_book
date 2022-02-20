@@ -1,15 +1,33 @@
 from datetime import datetime
 import streamlit as st
+import subprocess
 import random
 import os
 
+try:
+    from keywords import ADMIN_PASSWORD
+except: 
+    from .keywords import ADMIN_PASSWORD
+
 def password_entered():
-    """Checks whether a password entered by the user is correct."""
-    if st.session_state["password"] == "123": #st.secrets["password"]:
+    """
+    Checks whether a password entered by the user is correct.
+    Checks agains secrets (if defined) otherwise checks against hardcoded password.
+    """
+    # Get the password
+    try:
+        PASSWORD = st.secrets["ADMIN_PASSWORD"]
+    except:
+        PASSWORD = ADMIN_PASSWORD
+    # Compare against password entered by the user
+    if st.session_state["password"] == PASSWORD:
         st.session_state["password_correct"] = True
         del st.session_state["password"]  # don't store password
     else:
         st.session_state["password_correct"] = False
+    # Delete password from session state
+    del PASSWORD
+    return
 
 def password_login(user_id):
     if "password_correct" not in st.session_state:

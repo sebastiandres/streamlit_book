@@ -1,13 +1,12 @@
 import streamlit as st
-import subprocess
 import os
 
 try:
     from helpers import get_datetime_string, get_git_revision_short_hash
+    from keywords import ANSWER_FILENAME 
 except: 
     from .helpers import get_datetime_string, get_git_revision_short_hash
-
-ANSWER_FILENAME = "./tmp/answers.csv"
+    from .keywords import ANSWER_FILENAME 
 
 def create_answer_file():
     if not os.path.exists(ANSWER_FILENAME):

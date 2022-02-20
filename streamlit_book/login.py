@@ -57,5 +57,3 @@ def get_token_from_user(user_id):
         return token
     else:
         return None
-
-create_new_user_and_token()

@@ -46,3 +46,4 @@ ASSERT = "assert:"
 
 USERS_FILENAME = "./tmp/users.csv"
 ANSWER_FILENAME = "./tmp/answers.csv"
+ADMIN_PASSWORD = "2lazy2change1password"

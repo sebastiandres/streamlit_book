@@ -6,7 +6,7 @@ try:
     from keywords import USERS_FILENAME, ANSWER_FILENAME
     from helpers import password_login, download_file, get_git_revision_short_hash
 except: 
-    from .keywords import USERS_FILENAME, ANSWER_FILENAME
+    from .keywords import USERS_FILENAME, ANSWER_FILENAME, ADMIN_PASSWORD
     from .helpers import password_login, download_file, get_git_revision_short_hash
 
 def admin_page():

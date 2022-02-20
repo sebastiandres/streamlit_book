@@ -4,21 +4,21 @@ from glob import glob
 import os
 import pandas as pd
 
-from .admin import admin_page
-    
 try:
-    #from .file_reader import *
-    #from .login import *
+    from .file_reader import get_all_files, create_buttons
+    from .login import create_new_user_and_token, get_user_from_token  
     from .admin import admin_page
-    from .answers import get_git_revision_short_hash
+    from .helpers import get_git_revision_short_hash
     from .render import render_file
-except:
-    #from file_reader import *
-    #from login import *
-    #from render import render_file
+except Exception as e:
+    print("Cannot import from . ", e)    
+    from file_reader import get_all_files, create_buttons
+    from login import create_new_user_and_token, get_user_from_token 
     from admin import admin_page
-    from answers import get_git_revision_short_hash
+    from helpers import get_git_revision_short_hash
     from render import render_file
+except Exception as e:
+    print("Cannot import! ", e)    
 
 def set_book_config(path="pages",
                     toc=False,
