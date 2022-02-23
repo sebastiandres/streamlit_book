@@ -20,7 +20,7 @@ except Exception as e:
 except Exception as e:
     print("Cannot import! ", e)    
 
-def set_book_config(path="pages",
+def set_chapter_config(path="pages",
                     toc=False,
                     button="top",
                     button_previous="⬅️",
@@ -53,6 +53,9 @@ def set_book_config(path="pages",
     :return: None
     """
     # Observation: File number goes from 0 to n-1.
+
+    # Quick and dirty
+    path = str(path)
 
     # Store the parameters
     if "save_answers" not in st.session_state:
@@ -164,23 +167,23 @@ def set_book_config(path="pages",
             on_load_footer()
     return
 
-def set_library_config(options, paths,
-                        menu_title="Select a book",
+def set_book_config(options, paths,
+                        menu_title="Select a chapter",
                         menu_icon="book", 
                         icons=None, 
                         orientation=None, 
                         styles=None,
                         save_answers=False
                         ):
-    """Creates a list of books using the streamlit_option_menu library.
-    Renders the book based on the selection.
+    """Creates a book using the streamlit_option_menu library.
+    Renders each of the corresponding chapters based on their properties.
     Uses the same configurations used by streamlit-option-menu 
     (https://github.com/victoryhb/streamlit-option-menu)
     and icons from bootstrap icons (https://icons.getbootstrap.com/).
 
-    :param options: List of book names to be displayed
+    :param options: List of chapter names to be displayed
     :type options: list of str
-    :param paths: List of book paths containging the pages (py, md) to be displayed
+    :param paths: List of chapter paths containging the pages (py, md) to be displayed
     :type paths: list of str
     :param menu_title: Title of the menu, can be empty to be skipped.
     :type menu_title: str
@@ -228,5 +231,5 @@ def set_library_config(options, paths,
         st.session_state.book_number = selected_book_number
         st.session_state.page_number = 0
         
-    # Launch the corresponding book
-    set_book_config(path=paths[selected_book_number], save_answers=save_answers)
+    # Launch the corresponding chapter
+    set_chapter_config(path=paths[selected_book_number], save_answers=save_answers)
