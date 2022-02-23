@@ -1,6 +1,11 @@
 Multiple choice question
 ===========================
 
+Python
+--------
+
+.. autofunction:: __init__.multiple_choice
+
 Markdown
 ----------
 
@@ -19,20 +24,5 @@ Optional configurations
 * `failure:` This will get rendered on a st.failure element if answer is wrong. If not provided, it just displays "Wrong answer".
 * `button:` Alternative text for the button. If not provided, it displays "Check answer'. 
 
-Python
---------
-
-.. autofunction:: __init__.multiple_choice
-
 Example
----------
-
-.. code-block:: none
-
-    stb.multiple-choice
-    Which of the following are python libraries?
-    [T] streamlit
-    [F] pikachu
-    [T] numpy
-    [F] psyduck
-    [T] matplotlib
+----------

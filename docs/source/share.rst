@@ -1,9 +1,20 @@
-Share
-================
+Share on Social Media
+======================
 
-You can use share buttons for social media. This is based on https://sharingbuttons.io/, 
-which after a couple of hours of googling turn out to be the simplest way to share the content. 
+You can create share buttons for social media. This is based on the code I found at https://sharingbuttons.io/, 
+which after a couple of hours of googling turned out to be the simplest way to share the content. 
 Kudos to creator. It has some minor modifications, but it's mostly a wrapping of the code for stremlit.
+
+It requires as arguments the message and the url.
+
+Python
+--------
+
+.. autofunction:: __init__.share
+
+
+Markdown
+--------
 
 .. code-block:: none
 
@@ -11,10 +22,6 @@ Kudos to creator. It has some minor modifications, but it's mostly a wrapping of
     Some text
     http://www.some-url.com
 
-Python
---------
-
-.. autofunction:: __init__.share
 
 Example
 --------

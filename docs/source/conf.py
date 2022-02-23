@@ -19,7 +19,7 @@ print("sys.path:", sys.path)
 # -- Project information -----------------------------------------------------
 
 project = 'streamlit_book'
-copyright = '2021, Sebastian Flores Benner'
+copyright = '2022, Sebastian Flores Benner'
 author = 'Sebastian Flores Benner'
 
 # The full version, including alpha/beta/rc tags

@@ -1,4 +1,8 @@
 bookmark.txt
+stb_examples/
+tmp/
+stb_*.py
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

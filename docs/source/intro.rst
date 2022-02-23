@@ -1,28 +1,23 @@
 Introduction
 ============
 
-streamlit_book is a (hopefully simpler) way to create streamlit apps using markdown and folder convention.
+streamlit_book is a (hopefully simpler) way to create streamlit apps using python/markdown and folder convention.
 
 Capabilities
 --------------------
 
-* Reads all markdown and python files on the provided folder, allowing easy navigation
+* Reads and renders markdown and python files on the provided folders.
 * Navigation: 
-    * Select boxes on sidebar - based on the the file structure
-    * Previous and next (customizable) buttons
-* Bookmark button - save your last read page!
-* Predefined activities: 
-    * to do list 
+    * Chapter: previous, next and reload (customizable) buttons
+    * Book: lateral menu to access different chapters
+* Predefined activities, from python or markdown:
     * true or false question
     * single choice question
     * multiple choice question
-* Activities can be defined from plain markdown or from python functions
-
-How does it works?
---------------------
-
-* It will read the alphabetical order of the python and markdown files of the given path.
-* It will read and render the files into streamlit, allowing a enriched markdown for pedagogical activities.
+    * to do list 
+* User answers to provided questions can (optionally) be saved.
+* User's token: users can continue his session (and we can store his answers, if needed).
+* Admin view: you get some stats on users and answers.
 
 Why is it interesting?
 -------------------------
