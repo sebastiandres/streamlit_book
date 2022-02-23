@@ -6,14 +6,14 @@ import pandas as pd
 
 try:
     from .file_reader import get_all_files, create_buttons
-    from .login import create_new_user_and_token, get_user_from_token  
+    from .login import create_new_user_and_token, get_user_from_token, get_token_from_user  
     from .admin import admin_page
     from .helpers import get_git_revision_short_hash
     from .render import render_file
 except Exception as e:
     print("Cannot import from . ", e)    
     from file_reader import get_all_files, create_buttons
-    from login import create_new_user_and_token, get_user_from_token 
+    from login import create_new_user_and_token, get_user_from_token, get_token_from_user
     from admin import admin_page
     from helpers import get_git_revision_short_hash
     from render import render_file
