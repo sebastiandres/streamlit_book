@@ -1,12 +1,16 @@
-Setting up a chapter
+Chapter configuration
 ==============================================
-
-Use the arguments on `set_chapter_config` to personalize to your needs.
 
 How does it works?
 --------------------
 
-* It will read the alphabetical order of the python and markdown files of the given path.
-* It will read and render the files into streamlit, allowing a enriched markdown/python for pedagogical activities.
+Using the function `set_chapter_config`:
 
-.. autofunction:: __init__.set_book_config
+* Will setup the page navigation text/icons for a unique chapter.
+* Will sort the python and markdown files of the given path on lexigraphic order.
+* Will read and render the files into streamlit, allowing a enriched markdown/python of the implemented activities.
+
+Required and optional arguments
+--------------------------------
+
+.. autofunction:: __init__.set_chapter_config

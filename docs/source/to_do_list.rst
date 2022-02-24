@@ -16,8 +16,7 @@ The to-do list follows the standard Markdown syntax.
 
 Accepts the following optional parameter:
 
-* `success:` This will get rendered on a st.success element when completing the tasks. 
-If not provided, it just returns a default success message.
+* `success:` This will get rendered on a st.success element when completing the tasks. If not provided, it just returns a default success message.
 
 Python
 --------
@@ -30,3 +29,4 @@ Example
 .. image:: _images/to_do_list.gif
   :width: 800
   :alt: Rendering of to_do_list
+

@@ -26,7 +26,7 @@ def true_or_false(question, answer,
     :type error: str, optional
     :param button: message to be displayed on the button that checks the answer
     :type button: str, optional
-    :return: tuple of booleans with button press status and correctness of answer
+    :return: tuple of booleans(button_pressed, answer_correct) with the button status and correctness of answer
     :rtype: tuple of bool
     """
     if len(question)==0:

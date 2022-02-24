@@ -15,6 +15,18 @@ This is the safe way. Don't stray from this path.
 
     pip install streamlit_book
 
+On the `requirements.txt` file it should be simply the line:
+
+.. code-block:: none
+
+    streamlit_book
+
+Or, optionally, with a specific version:
+
+.. code-block:: none
+
+    streamlit_book==0.7.0
+
 Install from repository
 ***********************
 
@@ -24,3 +36,9 @@ This is good for testing the library, but might encounter some bugs, in which ca
 .. code-block:: bash
 
     pip install git+https://github.com/sebastiandres/streamlit_book.git
+
+On the `requirements.txt` file it should be simply the line:
+
+.. code-block:: none
+
+    git+https://github.com/sebastiandres/streamlit_book.git

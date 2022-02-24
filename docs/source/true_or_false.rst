@@ -1,14 +1,25 @@
 True or False question
 =========================
 
-This functionality allows to ask a True or False question. 
-It requires a question and a the solution as True/False value. 
-Optionally, the success, failure and button can be customized.
+This functionality allows to ask a true/false type of question. 
+It requires a question and the solution as a True/False value. 
+Optionally, the texts for success, error and button can be customized.
 
 Python
 --------
 
 .. autofunction:: __init__.true_or_false
+
+Format for questions where expected answer is True
+
+.. code-block:: python
+
+    stb.true_or_false("Question description", True, 
+                      success="custom success message", 
+                      error="custom error message", 
+                      button="custom button text")
+
+The code for a question with expected False answer is exactly similar.
 
 Markdown
 --------
@@ -20,31 +31,40 @@ Format for questions where expected answer is True
     stb.true_or_false
     Question description
     True
+    success: custom success message
+    error: custom error message
+    button: custom button message
 
-Format for questions where expected answer is False
+Format for a question with expected False answer is exactly similar.
 
-.. code-block:: none
-
-    stb.true_or_false
-    Question description
-    False
-
-Optional arguments
-
-* `success:` This will get rendered on a st.success element if answer is correct. If not provided, it just returns a default success message.
-* `failure:` This will get rendered on a st.failure element if answer is wrong. If not provided, it just displays "Wrong answer".
-* `button:` Alternative text for the button. If not provided, it displays "Check answer'. 
+The success, error and button lines are optional, same as on the python implementation.
 
 Example
 --------
 
-A complete format for true-or-false is as follows:
+Python code:
+
+.. code-block:: python
+    
+    stb.true_or_false('Is "Indiana Jones and the Last Crusade" the best movie of the trilogy?', 
+                      True, 
+                      success="You have chosen wisely", 
+                      error="You have chosen poorly", 
+                      button="You must choose")
+
+Markdown code:
 
 .. code-block:: none
 
     stb.true_or_false
-    Is "Indiana Jones and the Last Crusade" one of the best movies?
+    Is "Indiana Jones and the Last Crusade" the best movie of the trilogy?
     True
     success: You have chosen wisely
-    failure: You chose poorly
+    error: You have chosen poorly
     button: You must choose
+
+Result:
+
+.. image:: _images/true_or_false.gif
+  :width: 600
+  :alt: true-or-false question

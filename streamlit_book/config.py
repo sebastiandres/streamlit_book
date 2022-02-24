@@ -177,9 +177,9 @@ def set_book_config(options, paths,
                         ):
     """Creates a book using the streamlit_option_menu library.
     Renders each of the corresponding chapters based on their properties.
-    Uses the same configurations used by streamlit-option-menu 
-    (https://github.com/victoryhb/streamlit-option-menu)
-    and icons from bootstrap icons (https://icons.getbootstrap.com/).
+    Uses the same configurations used by `streamlit-option-menu 
+    <https://github.com/victoryhb/streamlit-option-menu>`_
+    and icons from `bootstrap-icons <https://icons.getbootstrap.com/>`_.
 
     :param options: List of chapter names to be displayed
     :type options: list of str
@@ -189,7 +189,7 @@ def set_book_config(options, paths,
     :type menu_title: str
     :param menu_icon: Icon to be used on the menu, from bootstrap icons.
     :type menu_icon: str
-    :param icos: Icons to be used. Can be a single one used for all books, or a list of icons for each book.
+    :param icons: Icons to be used. Can be a single one used for all books, or a list of icons for each book.
     :type menu_icon: str or list of str
     :param orientation: Orientation of the menu. Can be "horizontal" or "vertical".
     :type orientation: str
