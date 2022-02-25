@@ -1,28 +1,84 @@
 Single choice question
 ========================
 
+This functionality allows to ask a single choice question. 
+It requires a question, the alternatives and the (unique) answer.
+Optionally, the texts for success, error and button can be customized.
+
 Python
 -------
 
 .. autofunction:: __init__.single_choice
 
+An example code for a single choice questions is:
+
+.. code-block:: python
+
+    stb.true_or_false("Question description", 
+                      ["False alternative", "Another false alternative", 
+                       "The true alternative", "Yet another false alternative"],
+                      2, 
+                      success="custom success message", 
+                      error="custom error message", 
+                      button="custom button text")
+
+Notice that in this particular case, the true answer had index 2, but can be any other compatible index. 
+As usual, success, error and button texts are optionals and can be customized.
+
+
 Markdown
 --------
+
+Notice that the true alternative is preluded by character `+`,
+while the false alternatives are preluded by character `-`. 
+You can choose the order for all the alternatives.
 
 .. code-block:: none
 
     stb.single_choice
-    Which is the current version of streamlit?
-    - 0.0.1
-    - 0.5.5
-    + 1.2.0
-    - 9.9.9
+    Question description
+    - False alternative
+    - Another false alternative
+    + The true alternative
+    - Yet another false alternative
+    success: custom success message
+    error: custom error message
+    button: custom button message
 
-Optional configurations
-
-* `success:` This will get rendered on a st.success element if answer is wrong. If not provided, it just returns a default success message.
-* `failure:` This will get rendered on a st.failure element if answer is wrong. If not provided, it just displays "Wrong answer".
-* `button:` Alternative text for the button. If not provided, it displays "Check answer'. 
+The success, error and button lines are optional, same as on the python implementation.
 
 Example
----------
+--------
+
+Python code:
+
+.. code-block:: python
+    
+    stb.single_choice("What does pandas (python library) stands for?",
+                      ["The cutest bear", "Pure Adamantium Numeric Datasets And Stuff", 
+                       "PArties & DAtaSets", "Panel Data"],
+                      3,
+                      success='Now you know!', 
+                      error='Nopes, not this one...', 
+                      button='Check'
+                     )
+    
+Markdown code:
+
+.. code-block:: none
+
+    stb.single_choice
+    What does pandas (python library) stands for?
+    - The cutest bear
+    - Pure Adamantium Numeric Datasets And Stuff
+    - PArties & DAtaSets
+    + Panel Data
+    success: Now you know
+    error: Nopes, not this one...
+    button: Check
+
+Result:
+
+.. image:: _images/single_choice.gif
+  :width: 600
+  :alt: single choice question

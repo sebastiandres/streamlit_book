@@ -10,7 +10,7 @@ Python
 
 .. autofunction:: __init__.true_or_false
 
-Format for questions where expected answer is True
+The code for questions with expected answer is True
 
 .. code-block:: python
 
@@ -46,11 +46,14 @@ Python code:
 
 .. code-block:: python
     
-    stb.true_or_false('Is "Indiana Jones and the Last Crusade" the best movie of the trilogy?', 
-                      True, 
-                      success="You have chosen wisely", 
-                      error="You have chosen poorly", 
-                      button="You must choose")
+    stb.single_choice("What does pandas (python library) stands for?",
+                      ["The cutest bear", "Pure Adamantium Numeric Datasets And Stuff", 
+                       "PArties & DAtaSets", "Panel Data"],
+                      3,
+                      success='Now you know!', 
+                      error='Nopes, not this one...', 
+                      button='Check'
+                     )
 
 Markdown code:
 

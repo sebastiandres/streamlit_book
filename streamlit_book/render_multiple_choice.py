@@ -54,10 +54,12 @@ def multiple_choice(question, options_dict,
         if st.button(button, key=key):
             # Check answers
             if all(u==a for u, a in zip(cb_list, options_dict.values())):
-                st.success(success)
+                if success:
+                    st.success(success)
                 is_correct = True
             else:
-                st.error(error)
+                if error:
+                    st.error(error)
                 is_correct = False
             # Save the answers, if required
             if "save_answers" in st.session_state and st.session_state.save_answers:                

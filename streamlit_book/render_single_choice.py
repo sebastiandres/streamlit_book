@@ -47,10 +47,12 @@ def single_choice(question, options, answer_index,
         if st.button(button, key=key):
             # Check ansers
             if options.index(user_answer) == answer_index:
-                st.success(success)
+                if success:
+                    st.success(success)
                 is_correct = True
             else:
-                st.error(error)
+                if error:
+                    st.error(error)
                 is_correct = False
             # Save the answers, if required
             if "save_answers" in st.session_state and st.session_state.save_answers:
