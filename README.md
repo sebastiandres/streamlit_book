@@ -9,7 +9,7 @@
 The list of all demos of the library for release 0.7.0. are:
 
 * [Demo Activities v0.7.0](https://share.streamlit.io/sebastiandres/stb_activities_demo_v070/main): how activities can be used without multipage capability.
-* [Demo Chapter v0.7.0](<https://share.streamlit.io/sebastiandres/stb_chapter_demo_v070/main): Using a chapter (previous/next pagination).
+* [Demo Chapter v0.7.0](https://share.streamlit.io/sebastiandres/stb_chapter_demo_v070/main): Using a chapter (previous/next pagination).
 * [Demo Book v0.7.0](https://share.streamlit.io/sebastiandres/stb_book_demo_v070/main): Using a book (sidebar navigation on chapters).
 
 ## Examples 
@@ -32,7 +32,7 @@ Install it:
 pip install streamlit_book
 ```
 
-There are [different ways to use it](https://streamlit-book.readthedocs.io/en/latest/config.html), but in short just add to your classic `streamlit_app.py` file with the function that list the files to be read:
+There are [different ways to use it](https://streamlit-book.readthedocs.io/en/latest/config.html), but in short just add to `streamlit_app.py` the function that list the files to be read (and other properties):
 
 ```python
 import streamlit as st
