@@ -30,7 +30,7 @@ except:
     #from .render_code_input import code_input
     #from .render_file_upload import file_upload
     from .social_media import share
-    from colored_expanders import add_color_to_expanders
+    from .colored_expanders import add_color_to_expanders
 
 
 

@@ -2,7 +2,7 @@ import streamlit as st
 
 try:
     from keywords import *
-    from colored_expanders import add_color_to_expander
+    from colored_expanders import add_color_to_expanders
     from render_to_do_list import to_do_list_from_lines
     from render_true_or_false import true_or_false_from_lines
     from render_multiple_choice import multiple_choice_from_lines
@@ -13,7 +13,7 @@ try:
     from social_media import share_from_lines
 except:
     from .keywords import *
-    from .colored_expanders import add_color_to_expander
+    from .colored_expanders import add_color_to_expanders
     from .render_to_do_list import to_do_list_from_lines
     from .render_true_or_false import true_or_false_from_lines
     from .render_multiple_choice import multiple_choice_from_lines
@@ -29,12 +29,12 @@ def render_file(fullpath):
     given the fullpath (path and filename).
     Only admits python or markdown, also by construction.
     """
-    add_color_to_expander()
     if fullpath.endswith(".py"):
         # Execute as a regular python file 
         with open(fullpath, "rb") as source_file:
             code = compile(source_file.read(), fullpath, "exec")
         exec(code, globals(), locals())
+        add_color_to_expanders()
     elif fullpath.endswith(".md"):
         # Read the markdown and render it
         with open(fullpath) as fh:
@@ -63,5 +63,6 @@ def render_file(fullpath):
                     share_from_lines(lines)
                 else:
                     st.markdown(chunck, unsafe_allow_html=True)
+        add_color_to_expanders()
     else:
         st.warning("File not supported")
