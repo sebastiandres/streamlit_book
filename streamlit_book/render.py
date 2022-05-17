@@ -2,6 +2,7 @@ import streamlit as st
 
 try:
     from keywords import *
+    from colored_expanders import add_colored_expander
     from render_to_do_list import to_do_list_from_lines
     from render_true_or_false import true_or_false_from_lines
     from render_multiple_choice import multiple_choice_from_lines
@@ -12,6 +13,7 @@ try:
     from social_media import share_from_lines
 except:
     from .keywords import *
+    from .colored_expanders import add_colored_expander
     from .render_to_do_list import to_do_list_from_lines
     from .render_true_or_false import true_or_false_from_lines
     from .render_multiple_choice import multiple_choice_from_lines
@@ -27,11 +29,16 @@ def render_file(fullpath):
     given the fullpath (path and filename).
     Only admits python or markdown, also by construction.
     """
-    with open(fullpath) as fh:
-        file_content = fh.read()
-        if fullpath.endswith(".py"):
-            exec(file_content)
-        elif fullpath.endswith(".md"):
+    if fullpath.endswith(".py"):
+        # Execute as a regular python file 
+        with open(fullpath, "rb") as source_file:
+            code = compile(source_file.read(), fullpath, "exec")
+        exec(code, globals(), locals())
+        add_colored_expander() 
+    elif fullpath.endswith(".md"):
+        # Read the markdown and render it
+        with open(fullpath) as fh:
+            file_content = fh.read()
             chuncks = file_content.split("\n\n")
             clean_chuncks = [c.strip("\n") for c in chuncks]
             valid_chuncks = [c for c in clean_chuncks if len(c)>0]
@@ -56,5 +63,6 @@ def render_file(fullpath):
                     share_from_lines(lines)
                 else:
                     st.markdown(chunck, unsafe_allow_html=True)
-        else:
-            st.warning("File not supported")
+        add_colored_expander()
+    else:
+        st.warning("File not supported")
