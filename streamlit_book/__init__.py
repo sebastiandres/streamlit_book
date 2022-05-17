@@ -16,6 +16,7 @@ try:
     #from render_code_input import code_input
     #from render_file_upload import file_upload
     from social_media import share
+    from colored_expanders import add_color_to_expanders
 except:
     ### The main function to be used to read the files
     from .config import set_chapter_config
@@ -29,5 +30,7 @@ except:
     #from .render_code_input import code_input
     #from .render_file_upload import file_upload
     from .social_media import share
+    from colored_expanders import add_color_to_expanders
+
 
 

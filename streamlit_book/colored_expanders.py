@@ -1,6 +1,6 @@
 import streamlit as st
 
-def add_colored_expander():
+def add_color_to_expanders():
     # Define your javascript
     my_js = """
     // Define the colors
