@@ -1,1 +1,2 @@
-git+https://github.com/sebastiandres/streamlit_book.git
+#git+https://github.com/sebastiandres/streamlit_book.git
+streamlit_book==0.7.3
