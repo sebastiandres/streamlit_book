@@ -1,12 +1,12 @@
 Single choice question
-========================
+------------------------
 
 This functionality allows to ask a single choice question. 
 It requires a question, the alternatives and the (unique) answer.
 Optionally, the texts for success, error and button can be customized.
 
 Python
--------
+~~~~~~~~~~~~~~~~~~~~
 
 .. autofunction:: __init__.single_choice
 
@@ -27,7 +27,7 @@ As usual, success, error and button texts are optionals and can be customized.
 
 
 Markdown
---------
+~~~~~~~~~~~~~~~~~~~~
 
 Notice that the true alternative is preluded by character `+`,
 while the false alternatives are preluded by character `-`. 
@@ -48,7 +48,7 @@ You can choose the order for all the alternatives.
 The success, error and button lines are optional, same as on the python implementation.
 
 Example
---------
+~~~~~~~~~~~~~~~~~~~~
 
 Python code:
 

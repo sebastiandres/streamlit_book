@@ -32,6 +32,16 @@ def multiple_choice(question, options_dict,
     :type button: str, optional
     :return: tuple of booleans with button press status and correctness of answer
     :rtype: tuple of bool
+
+    Example:
+    import streamlit_book as stb
+    stb.multiple_choice("I typically ask recruiters to point out which of these area pokemon",
+                        {"ditto":True, "jupyter":False, "pyspark":False,
+                        "scikit":False, "metapod":True, "vulpix":True},
+                        success="Are you a pokemon master?",
+                        error="Gotta catch them all!",
+                        button='Check my poke-knowledge!'
+                        )
     """
     cb_list = []
     if len(question)==0:
@@ -71,54 +81,3 @@ def multiple_choice(question, options_dict,
         else:
             # Return if button is not pressed
             return False, None
-
-
-def multiple_choice_parser(lines):
-    """Parses a list of lines into a dictionary with the parsed values.
-
-    :param lines: list of lines
-    :type lines: list
-    :return: parsed values for the multiple choice quizz type.
-    :rtype: dict
-    """
-    # Define default feedback messages 
-    parse_dict = {
-                    "question":"",
-                    "options_dict":{},
-                  }
-    # Iterate through lines and process each line accordingly
-    for i, line in enumerate(lines):
-        if i==0:
-            if check_keyword(line, MULTIPLE_CHOICE_KEYWORD):
-                continue
-        elif line.startswith(MULTIPLE_CHOICE_TRUE):
-            option_text = line[len(MULTIPLE_CHOICE_TRUE):].strip()
-            parse_dict["options_dict"][option_text] = True
-        elif line.startswith(MULTIPLE_CHOICE_FALSE):
-            option_text = line[len(MULTIPLE_CHOICE_FALSE):].strip()
-            parse_dict["options_dict"][option_text] = False
-        elif line.startswith(BUTTON):
-            msg = line[len(BUTTON):].strip()
-            parse_dict["button"] = msg  
-        elif line.startswith(SUCCESS):
-            msg = line[len(SUCCESS):].strip()
-            parse_dict["success"] = msg  
-        elif line.startswith(ERROR):
-            msg = line[len(ERROR):].strip()
-            parse_dict["error"] = msg
-        else:
-            # Put the rest of the lines into header as markdown
-            parse_dict["question"] += line + "\n"
-    return parse_dict
-
-
-def multiple_choice_from_lines(lines):
-    """Renders a multiple choice question from a list of lines.
-
-    :param lines: list of lines
-    :type lines: list
-    :return: None
-    """
-    parse_dict = multiple_choice_parser(lines)
-    multiple_choice(**parse_dict)
-    return

@@ -32,6 +32,17 @@ def single_choice(question, options, answer_index,
     :type button: str, optional
     :return: tuple of booleans with button press status and correctness of answer
     :rtype: tuple of bool
+
+    Example:
+    import streamlit_book as stb
+    stb.single_choice("What does pandas (python library) stands for?",
+                    ["The cutest bear", "Pure Adamantium Numeric Datasets And Stuff",
+                    "PArties & DAtaSets", "Panel Data"],
+                    3,
+                    success='Now you know!',
+                    error='Nopes, not this one...',
+                    button='Check'
+                    )    
     """
     if len(question)==0:
         st.error("Please provide a question")
@@ -62,59 +73,3 @@ def single_choice(question, options, answer_index,
         else:
             # Return if button is not pressed
             return False, None
-
-def single_choice_parser(lines):
-    """Parses a list of lines into a dictionary with the parsed values.
-
-    :param lines: list of lines
-    :type lines: list
-    :return: parsed values for the single choice quizz type.
-    :rtype: dict
-    """
-    # Define default feedback messages 
-    parse_dict = {
-                    "question":"",
-                    "options":[],
-                }
-    answer = ""
-    # Iterate through lines and process each line accordingly
-    for i, line in enumerate(lines):
-        if i==0:
-            if check_keyword(line, SINGLE_CHOICE_KEYWORD):
-                continue
-            else:
-                break
-        elif line.startswith(SINGLE_CHOICE_CORRECT):
-            option_text = line[len(SINGLE_CHOICE_CORRECT):].strip()
-            parse_dict["options"].append(option_text)
-            answer = option_text
-        elif line.startswith(SINGLE_CHOICE_WRONG):
-            option_text = line[len(SINGLE_CHOICE_WRONG):].strip()
-            parse_dict["options"].append(option_text)
-        elif line.startswith(BUTTON):
-            msg = line[len(BUTTON):].strip()
-            parse_dict["button"] = msg  
-        elif line.startswith(SUCCESS):
-            msg = line[len(SUCCESS):].strip()
-            parse_dict["success"] = msg  
-        elif line.startswith(ERROR):
-            msg = line[len(ERROR):].strip()
-            parse_dict["error"] = msg
-        else:
-            parse_dict["question"] += line + "\n"
-    # Store the answer_index
-    parse_dict["answer_index"] = parse_dict["options"].index(answer)
-    return parse_dict
-
-
-
-def single_choice_from_lines(lines):
-    """Renders a single choice question from a list of lines.
-
-    :param lines: list of lines
-    :type lines: list
-    :return: None
-    """
-    parse_dict = single_choice_parser(lines)
-    single_choice(**parse_dict)
-    return

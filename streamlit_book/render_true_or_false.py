@@ -28,6 +28,15 @@ def true_or_false(question, answer,
     :type button: str, optional
     :return: tuple of booleans(button_pressed, answer_correct) with the button status and correctness of answer
     :rtype: tuple of bool
+
+    Example:
+    import streamlit_book as stb
+    stb.true_or_false('Is "Indiana Jones and the Last Crusade" the best movie of the trilogy?',
+                        True,
+                        success="You have chosen wisely",
+                        error="You have chosen poorly",
+                        button="You must choose"
+                        )
     """
     if len(question)==0:
         st.error("Please provide a question")
@@ -54,53 +63,3 @@ def true_or_false(question, answer,
         else:
             # Not pressed yet
             return False, None
-
-def true_or_false_parser(lines):
-    """Parses a list of lines into a dictionary with the parsed values.
-
-    :param lines: list of lines
-    :type lines: list
-    :return: parsed values for the true or false quizz type.
-    :rtype: dict
-    """
-
-    # Dict to store the parsed values
-    parse_dict = {}
-    # Iterate through lines and process each line accordingly
-    for i, line in enumerate(lines):
-        if i==0:
-            if check_keyword(line, TRUE_FALSE_KEYWORD):
-                continue
-            else:
-                break
-        elif i==1:
-            parse_dict["question"] = line
-        elif i==2:
-            answer = line.strip()
-            if answer in ("True", "False"):
-                parse_dict["answer"] = (answer == "True") # Convert to boolean, as required by the function
-            else:
-                break
-        elif line.startswith(BUTTON):
-            msg = line[len(BUTTON):].strip()
-            parse_dict["button"] = msg  
-        elif line.startswith(SUCCESS):
-            msg = line[len(SUCCESS):].strip()
-            parse_dict["success"] = msg  
-        elif line.startswith(ERROR):
-            msg = line[len(ERROR):].strip()
-            parse_dict["error"] = msg
-    return parse_dict
-
-
-def true_or_false_from_lines(lines):
-    """Renders a true or false question from a list of lines.
-    Used to parse from markdown.
-
-    :param lines: list of lines
-    :type lines: list
-    :return: None
-    """
-    parse_dict = true_or_false_parser(lines)
-    true_or_false(**parse_dict)
-    return

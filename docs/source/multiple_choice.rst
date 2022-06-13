@@ -1,12 +1,13 @@
 Multiple choice question
-===========================
+----------------------------
 
 This functionality allows to ask a multiple choice question. 
 It requires a question, the alternatives and the answer(s).
 Optionally, the texts for success, error and button can be customized.
 
 Python
---------
+~~~~~~~~~~~~~~~~~~~~
+
 
 .. autofunction:: __init__.multiple_choice
 
@@ -27,7 +28,8 @@ An example code for a single choice questions is:
                       button="custom button text")
 
 Markdown
-----------
+~~~~~~~~~~~~~~~~~~~~
+
 
 .. code-block:: none
 
@@ -45,7 +47,8 @@ Markdown
 The success, error and button lines are optional, same as on the python implementation.
 
 Example
-----------
+~~~~~~~~~~~~~~~~~~~~
+
 
 
 Python code:

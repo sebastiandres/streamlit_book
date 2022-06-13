@@ -5,8 +5,7 @@ The repository for the code is hosted at `<https://github.com/sebastiandres/stre
 
 The current implementation has been developed in Python 3. 
 
-Install from pypi
-***********************
+**Install from pypi**
 
 You can install the library from `pypi <https://pypi.org/project/streamlit_book/>`_. 
 This is the safe way. Don't stray from this path.
@@ -27,8 +26,7 @@ Or, optionally, with a specific version:
 
     streamlit_book==0.7.0
 
-Install from repository
-***********************
+**Install from repository**
 
 You can install the library directly from the latest available version on github. 
 This is good for testing the library, but might encounter some bugs, in which case you should let us know!

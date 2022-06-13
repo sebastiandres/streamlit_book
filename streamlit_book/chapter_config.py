@@ -20,16 +20,17 @@ except Exception as e:
 except Exception as e:
     print("Cannot import! ", e)    
 
-def set_chapter_config(path="pages",
-                    toc=False,
-                    button="top",
-                    button_previous="⬅️",
-                    button_next="➡️",
-                    button_refresh="🔄",
-                    on_load_header=None,
-                    on_load_footer=None,
-                    save_answers=False,
-                    ):
+def set_chapter_config(
+                        path="pages",
+                        toc=False,
+                        button="top",
+                        button_previous="⬅️",
+                        button_next="➡️",
+                        button_refresh="🔄",
+                        on_load_header=None,
+                        on_load_footer=None,
+                        save_answers=False,
+                        ):
     """Sets the book configuration, and displays the selected file.
 
     :param path: The path to root directory of the the files (py or md) to be rendered as pages of the book. 
@@ -72,42 +73,38 @@ def set_chapter_config(path="pages",
         return # Don't show anything else!
 
     # User login
-    query_params = st.experimental_get_query_params()
-    if "token" in query_params:
-        # Here we must handle the user session
-        token = query_params["token"][0] #Just consider the first one
-        ## If the token is wrong, show a special page (only)
-        user_id = get_user_from_token(token)
-        st.session_state.user_id = user_id
-        if user_id is None:
-            # Wrong token
-            st.markdown("Wrong token!")
-            user_id, token = create_new_user_and_token()
-            query_parameters = {"token": token}
-            def on_click():
-                st.experimental_set_query_params(**query_parameters)
-            if st.button("Go back to the main page?", on_click=on_click):
-                st.warning("You will be redirected to the main page.")
-            return
-    else:
-        # token not in query params
-        if "user_id" not in st.session_state:
-            # No user logged in, get user_id and token to redirect
+    if "user_id" not in st.session_state:
+        query_params = st.experimental_get_query_params()
+        if "token" in query_params:
+            # Here we must handle the user session
+            token = query_params["token"][0] #Just consider the first one
+            ## If the token is wrong, notify the user.
+            user_id = get_user_from_token(token)
+            if user_id is None:
+                # Wrong token
+                st.error("Wrong token! Use the regular url.")
+                return
+            else:
+                # Correct token
+                st.session_state.user_id = user_id
+                st.session_state.token = token
+                # Redirect to avoid the url with the token
+                del query_params["token"]
+                st.experimental_set_query_params(**query_params)
+        else:
+            # Token not in query params: create a new user and token
             user_id, token = create_new_user_and_token()
             st.session_state.user_id = user_id
-        else:
-            # We know the user_id, so we can get the token and reroute
-            token = get_token_from_user(st.session_state.user_id)
-        query_parameters = {"token": token}
-        st.experimental_set_query_params(**query_parameters)
+            st.session_state.token = token
 
-    # Save and answers behavior
+    # Save answers behavior
     if st.session_state.save_answers:
         if "warned_about_save_answers" not in st.session_state:
             def on_click():
                 st.session_state.warned_about_save_answers = True
             c1, c2 = st.columns([8,1])
-            c1.warning("Your answers will be saved.\n\nYou can relaunch the app using the custom url.")
+            user_url = f"?token={st.session_state.token}"
+            c1.warning(f"Your answers will be saved. You can relaunch the app using the following custom url (Save it!).\n\n{user_url}")
             c2.markdown("\n\n")
             c2.markdown("\n\n")
             c2.button("Dismiss", on_click=on_click)
@@ -166,70 +163,3 @@ def set_chapter_config(path="pages",
         if on_load_footer:
             on_load_footer()
     return
-
-def set_book_config(options, paths,
-                        menu_title="Select a chapter",
-                        menu_icon="book", 
-                        icons=None, 
-                        orientation=None, 
-                        styles=None,
-                        save_answers=False
-                        ):
-    """Creates a book using the streamlit_option_menu library.
-    Renders each of the corresponding chapters based on their properties.
-    Uses the same configurations used by `streamlit-option-menu 
-    <https://github.com/victoryhb/streamlit-option-menu>`_
-    and icons from `bootstrap-icons <https://icons.getbootstrap.com/>`_.
-
-    :param options: List of chapter names to be displayed
-    :type options: list of str
-    :param paths: List of chapter paths containging the pages (py, md) to be displayed
-    :type paths: list of str
-    :param menu_title: Title of the menu, can be empty to be skipped.
-    :type menu_title: str
-    :param menu_icon: Icon to be used on the menu, from bootstrap icons.
-    :type menu_icon: str
-    :param icons: Icons to be used. Can be a single one used for all books, or a list of icons for each book.
-    :type menu_icon: str or list of str
-    :param orientation: Orientation of the menu. Can be "horizontal" or "vertical".
-    :type orientation: str
-    :param styles: Styles to be used. See the documentation of streamlit_option_menu.
-    :type styles: dict
-    :param save_answers: If True, it will save the answers in a csv file. Defaults to False.
-    :type save_answers: bool
-    :return: None
-    """
-    from streamlit_option_menu import option_menu
-
-    # Initialize variables
-    if "page_number" not in st.session_state:
-        st.session_state.page_number = 0
-    if "book_number" not in st.session_state:
-        st.session_state.book_number = 0
-
-    # Pack the arguments
-    execution_dict = {
-                        "menu_title": menu_title, 
-                        "options": options,
-                    }
-    args = [menu_icon, icons, orientation, styles]
-    if menu_icon is not None: execution_dict["menu_icon"] = menu_icon
-    if icons is not None: execution_dict["icons"] = icons
-    if orientation is not None: execution_dict["orientation"] = orientation
-    if styles is not None: execution_dict["styles"] = styles
-
-    # Execute the menu
-    if orientation=="horizontal":
-        selected_book_name = option_menu(**execution_dict)
-    else:
-        with st.sidebar:
-            selected_book_name = option_menu(**execution_dict)
-    
-    # Update variables
-    selected_book_number = options.index(selected_book_name)
-    if st.session_state.book_number != selected_book_number:
-        st.session_state.book_number = selected_book_number
-        st.session_state.page_number = 0
-        
-    # Launch the corresponding chapter
-    set_chapter_config(path=paths[selected_book_number], save_answers=save_answers)

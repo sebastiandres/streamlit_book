@@ -1,12 +1,13 @@
 True or False question
-=========================
+--------------------------
 
 This functionality allows to ask a true/false type of question. 
 It requires a question and the solution as a True/False value. 
 Optionally, the texts for success, error and button can be customized.
 
 Python
---------
+~~~~~~~~~~~~~~~~~~~~
+
 
 .. autofunction:: __init__.true_or_false
 
@@ -22,7 +23,8 @@ The code for questions with expected answer is True
 The code for a question with expected False answer is exactly similar.
 
 Markdown
---------
+~~~~~~~~~~~~~~~~~~~~
+
 
 Format for questions where expected answer is True
 
@@ -40,7 +42,8 @@ Format for a question with expected False answer is exactly similar.
 The success, error and button lines are optional, same as on the python implementation.
 
 Example
---------
+~~~~~~~~~~~~~~~~~~~~
+
 
 Python code:
 

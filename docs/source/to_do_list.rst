@@ -1,11 +1,12 @@
 To do list
-================
+-------------
 
 This functionality allows to create to-do list. 
 It only has as optional argument the text for success.
 
 Python
---------
+~~~~~~~~~~~~~~~~~~~~
+
 
 .. autofunction:: __init__.to_do_list
 
@@ -20,7 +21,8 @@ An example code for a to-do list is:
                   )
 
 Markdown
---------
+~~~~~~~~~~~~~~~~~~~~
+
 
 The to-do list follows the standard Markdown syntax.
 
@@ -36,7 +38,8 @@ The to-do list follows the standard Markdown syntax.
 The success text will get rendered on a st.success element when completing the tasks. If not provided, it just returns a default success message.
 
 Example
---------
+~~~~~~~~~~~~~~~~~~~~
+
 
 .. image:: _images/to_do_list.gif
   :width: 800
