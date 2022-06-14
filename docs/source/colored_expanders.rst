@@ -1,7 +1,7 @@
 Colored Expanders
 --------------------
 
-More colors to your expander!!!
+More colors to your expander!!! Just by importing the module you'll get this feature.
 
 .. raw:: html
 

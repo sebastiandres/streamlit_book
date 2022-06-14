@@ -11,4 +11,4 @@ It requires as arguments the message and the url.
 
 .. raw:: html
 
-    <iframe src="https://stbook.streamlitapp.com/?view=colored_expanders" width="600" height="400"></iframe>
+    <iframe src="https://stbook.streamlitapp.com/?view=share" width="600" height="400"></iframe>
