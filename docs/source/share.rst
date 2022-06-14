@@ -12,3 +12,5 @@ It requires as arguments the message and the url.
 .. raw:: html
 
     <iframe src="https://stbook.streamlitapp.com/?view=share" width="600" height="400"></iframe>
+    <a href="https://stbook.streamlitapp.com/?view=share">https://stbook.streamlitapp.com/?view=share</a>
+    
