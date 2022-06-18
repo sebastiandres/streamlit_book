@@ -19,6 +19,7 @@ try:
     # Other goodies
     from social_media import share
     from colored_expanders import add_color_to_expanders
+    from floating_button import floating_button
     from echo import echo
 except:
     ### The main function to be used to read the files
@@ -36,6 +37,7 @@ except:
     # Other goodies
     from .social_media import share
     from .colored_expanders import add_color_to_expanders
+    from .floating_button import floating_button
     from .echo import echo
 
 
