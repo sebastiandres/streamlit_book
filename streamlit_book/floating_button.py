@@ -12,7 +12,7 @@ def add_floating_button(url, bootstrap_icon, icon_color, background_color):
         i.bi {
             position: fixed;
             right: 10px;
-            bottom: 10px;
+            bottom: 50px;
             background: my_background_color;
             color: my_color;
             border-radius: 30%;
@@ -26,7 +26,7 @@ def add_floating_button(url, bootstrap_icon, icon_color, background_color):
     button_html = button_html.replace("my_background_color", background_color)
     button_html = button_html.replace("my_color", icon_color)
     button_html = button_html.replace("my_url", url_html)
-    st.components.v1.html(button_html, height=80)
+    st.components.v1.html(button_html, height=100)
     return url, bootstrap_icon, icon_color, background_color
 
 def make_it_float(url, bootstrap_icon, icon_color, background_color):
