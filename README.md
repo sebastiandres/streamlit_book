@@ -62,3 +62,8 @@ stb.set_book_config(menu_title="streamlit_book",
 
 [share_badge]: https://static.streamlit.io/badges/streamlit_badge_black_white.svg
 [share_link]: https://share.streamlit.io/sebastiandres/stb_book_demo_v070/main
+
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=sebastiandres/streamlit_book&type=Date)](https://star-history.com/#sebastiandres/streamlit_book&Date)
