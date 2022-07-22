@@ -25,7 +25,7 @@ def to_do_list(tasks, header="", success=TODO_SUCCESS):
     import streamlit_book as stb
     stb.to_do_list({"task 1":True, "task 2":False, "task 3":False},
                     header="A (completely optional) description for the to do list:",
-                    succes="Congrats! You did it!"
+                    success="Congrats! You did it!"
                     )    
     """
     if len(tasks)==0:
