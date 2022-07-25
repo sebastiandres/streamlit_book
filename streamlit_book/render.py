@@ -37,4 +37,10 @@ def render_file(fullpath):
         exec(code, globals(), locals())
         add_color_to_expanders()
     else:
-        st.warning(f"File extention not supported for file {fullpath}")
+        if fullpath_str.endswith(".md"):
+            with open(fullpath, "r") as source_file:
+                code = source_file.read()
+                st.markdown(code)
+                add_color_to_expanders()
+        else:
+            st.warning(f" ah: File extention not supported for file {fullpath}")
