@@ -30,6 +30,7 @@ def set_chapter_config(
                         on_load_header=None,
                         on_load_footer=None,
                         save_answers=False,
+                        display_page_info=True,
                         ):
     """Sets the book configuration, and displays the selected file.
 
@@ -51,6 +52,8 @@ def set_chapter_config(
     :type on_load_footer: function
     :param save_answers: If True, it will save the answers in a csv file. Defaults to False.
     :type save_answers: bool
+    :param display_page_info: If True, it will display the page info with the name and number. Defaults to True.
+    :type display_page_info: bool
     :return: None
     """
     # Observation: File number goes from 0 to n-1.
@@ -132,7 +135,7 @@ def set_chapter_config(
     # Update file_fullpath
     selected_file_fullpath = file_list[st.session_state.page_number]
     caption_text = f"Page {st.session_state.page_number+1} of {st.session_state.total_files}. File: {selected_file_fullpath}"
-
+    
     if st.session_state.toc:
         option = st.radio("Table of contents", options=file_list)
         st.session_state.page_number = file_list.index(option)
@@ -146,6 +149,7 @@ def set_chapter_config(
         if st.session_state.button in ["top", "both"]:
             create_buttons(caption_text, 
                             button_previous, button_next, button_refresh,
+                            display_page_info,
                             key="top")
 
         # Render the file using the magic
@@ -156,7 +160,9 @@ def set_chapter_config(
 
         # If required, put the button on the bottom of the page. Use columns for alignment
         if st.session_state.button in ["bottom", "both"]:
-            create_buttons(caption_text, button_previous, button_next, button_refresh, 
+            create_buttons(caption_text, 
+                            button_previous, button_next, button_refresh, 
+                            display_page_info,
                             key="bottom")
 
         # Execute the on_load_footer function

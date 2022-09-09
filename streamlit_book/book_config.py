@@ -28,7 +28,8 @@ def set_book_config(options, paths,
                         icons=None, 
                         orientation=None, 
                         styles=None,
-                        save_answers=False
+                        save_answers=False,
+                        display_page_info=True,
                         ):
     """Creates a book using the streamlit_option_menu library.
     Renders each of the corresponding chapters based on their properties.
@@ -52,6 +53,8 @@ def set_book_config(options, paths,
     :type styles: dict
     :param save_answers: If True, it will save the answers in a csv file. Defaults to False.
     :type save_answers: bool
+    :param display_page_info: If True, it will display the page info with the name and number. Defaults to True.
+    :type display_page_info: bool
     :return: None
     """
     from streamlit_option_menu import option_menu
@@ -87,4 +90,4 @@ def set_book_config(options, paths,
         st.session_state.page_number = 0
         
     # Launch the corresponding chapter
-    set_chapter_config(path=paths[selected_book_number], save_answers=save_answers)
+    set_chapter_config(path=paths[selected_book_number], save_answers=save_answers, display_page_info=display_page_info)

@@ -1,11 +1,10 @@
 Colored Expanders
 --------------------
 
-More colors to your expander!!! Just by importing the module you'll get this feature.
+More colors to your expander!!! You just have to start the expander header with the right keyword.
 
 .. raw:: html
 
-    <iframe src="https://stbook.streamlitapp.com/?view=colored_expanders" width="600" height="400"></iframe>
-    <a href="https://stbook.streamlitapp.com/?view=colored_expanders">https://stbook.streamlitapp.com/?view=colored_expanders</a>
+    <iframe src="https://stbook-methods.streamlitapp.com/?view=colored_expanders&embedded=true" width="600" height="400"></iframe>
     <br><br><br>
 

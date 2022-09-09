@@ -35,6 +35,7 @@ def create_buttons(caption_text,
                     button_previous, 
                     button_next, 
                     button_refresh,
+                    display_page_info,
                     key=""):
     """
     Function to create the navigation buttons.
@@ -44,7 +45,8 @@ def create_buttons(caption_text,
     if st.session_state.total_files <= 1:
         return
     # We have at least 2 files, so render the buttons
-    st.caption(caption_text)
+    if display_page_info:
+        st.caption(caption_text)
     p = len(button_previous)
     n = len(button_next)
     r = len(button_refresh)
