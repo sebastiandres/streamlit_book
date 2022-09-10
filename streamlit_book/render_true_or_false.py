@@ -43,9 +43,9 @@ def true_or_false(question, answer,
         return None, None
     else:
         key = question.lower().replace(" ","")
-        user_answer = st.radio(question, options=["True", "False"], key=key)
-        user_answer = (user_answer == "True") # Convert to boolean
-        if st.button(button, key=key):
+        user_answer_str = st.radio(question, options=["True", "False"], key=key)
+        user_answer = (user_answer_str == "True") # Convert to boolean
+        if st.button(button, key="button"+key):
             # Reveal the answer
             if user_answer == answer:
                 if success: 

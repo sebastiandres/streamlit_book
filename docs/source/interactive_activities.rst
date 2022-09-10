@@ -1,7 +1,7 @@
 Interactive Activities
 ===============================================
 
-There are different interactive activities that can be used on your apps:
+There are different interactive activities to be used in your apps:
 
 .. include:: true_or_false.rst
 .. include:: single_choice.rst

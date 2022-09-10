@@ -3,8 +3,6 @@ Installation
 
 The repository for the code is hosted at `<https://github.com/sebastiandres/streamlit_book>`_.
 
-The current implementation has been developed in Python 3. 
-
 **Install from pypi**
 
 You can install the library from `pypi <https://pypi.org/project/streamlit_book/>`_. 
@@ -20,11 +18,11 @@ On the `requirements.txt` file it should be simply the line:
 
     streamlit_book
 
-Or, optionally, with a specific version:
+Or, optionally, for the specific version X.Y.Z:
 
 .. code-block:: none
 
-    streamlit_book==0.7.0
+    streamlit_book==X.Y.Z
 
 **Install from repository**
 

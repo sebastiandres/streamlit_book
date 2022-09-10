@@ -9,7 +9,5 @@ The same old echo function from streamlit, but with an additional boolean parame
 
 .. raw:: html
 
-    <iframe src="https://stbook.streamlitapp.com/?view=echo" width="600" height="400"></iframe>
-    <a href="https://stbook.streamlitapp.com/?view=echo">https://stbook.streamlitapp.com/?view=echo</a>
-    <br><br><br>
+    <iframe src="https://stbook-methods.streamlitapp.com/?view=echo&embedded=true" width="600" height="400"></iframe>
 

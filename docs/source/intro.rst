@@ -20,18 +20,13 @@ Use streamlit_book to create more rich and interactive apps, activities and quiz
 
 There are a couple of examples where `streamlit_book` is used
 
-* `Happy Birds <https://share.streamlit.io/sebastiandres/streamlit_happy_birds/main/happy_birds.py>`_ : A self contained example that mixes features of the library with a funny twist.
-* `The (confusion) Matrix <https://share.streamlit.io/sebastiandres/ml-edu-1-confusion-matrix/main>`_: Take the blue pill to learn all about the confusion matrix.
-* `The Streamlitsaurus Rex <https://share.streamlit.io/sebastiandres/streamlit_datasaurus/main/app.py>`_: Will teach you to always visualize your data, and exhibits the mythical Datasaurus.
+* `Happy Birds <https://notangrybirds.streamlitapp.com/>`_ : A self contained example that mixes features of the library with a funny twist.
+* `The (confusion) Matrix <https://confusion-matrix.streamlitapp.com/>`_: Take the blue pill to learn all about the confusion matrix.
+* `The Streamlitsaurus Rex <https://datasaurus.streamlitapp.com/>`_: Will teach you to always visualize your data, and exhibits the mythical Datasaurus.
+* `SatSchool <https://share.streamlit.io/spiruel/satschool/main/app.py>`_: interactive app how to manipulate and understand data from satellites in a range of environmental contexts.
 
-The list of all demos of the library for release 0.8.0. are:
+Are you using streamlit_book? [https://twitter.com/sebastiandres](Let me know and I will add it there)!
 
-* `Demo Book v0.8.0 <https://share.streamlit.io/sebastiandres/stb_book_demo_v080/main>`_: Using a book (sidebar navigation on chapters).
-
-The list of all demos of the library for release 0.7.0. are:
-
-* `Demo Activities v0.7.0 <https://share.streamlit.io/sebastiandres/stb_activities_demo_v070/main>`_: how activities can be used without multipage capability.
-* `Demo Chapter v0.7.0 <https://share.streamlit.io/sebastiandres/stb_chapter_demo_v070/main>`_: Using a chapter (previous/next pagination).
-* `Demo Book v0.7.0 <https://share.streamlit.io/sebastiandres/stb_book_demo_v070/main>`_: Using a book (sidebar navigation on chapters).
-
-
+You can also check the web apps used on this documentation:
+* `<https://stbook-methods.streamlitapp.com/>`_ : All the activities and goodies in streamlit_book!
+* `<https://stbook-multipaging.streamlitapp.com/>`_ : How to do multipage with streamlit book!

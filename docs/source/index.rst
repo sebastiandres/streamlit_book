@@ -3,10 +3,7 @@ Welcome
 
 **streamlit_book** is an extension to the library streamlit, allowing an easier creation of streamlit apps with multipages and interactive activities.
 
-Try it out!
-------------
-
-`The interactive demo for v0.8.0 of the library <https://share.streamlit.io/sebastiandres/stb_book_demo_v080/main>`_
+You can try it out  `here <https://stbook-methods.streamlitapp.com>`_
 
 .. toctree::
    :maxdepth: 2
