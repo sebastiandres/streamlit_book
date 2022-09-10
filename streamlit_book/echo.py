@@ -9,18 +9,14 @@ _EMPTY_LINE_RE = re.compile("\\s*\n")
 
 @contextlib.contextmanager
 def echo(code_location="above", show=True):
-    """Use in a `with` block to draw some code on the app, then execute it.
-    Parameters
-    ----------
-    code_location : "above" or "below"
-        Whether to show the echoed code before or after the results of the
-        executed code block.
-    Example
-    -------
-    >>> with st.echo():
-    >>>     st.write('This code will be printed')
-
-    Copied and improved from: https://github.com/streamlit/streamlit/blob/d44b162909fb8adcae463172c78000029e5d2fef/lib/streamlit/echo.py
+    """Whether to show the echoed code before or after the results of the executed code block.
+    :param code_location: "above" or "below"
+    :type lines: str
+    :param show: Boolean to show or hide the code block
+    :type lines: bool
+    :return: None
+    :rtype: none
+    Copied and improved from `Streamlit's github <https://github.com/streamlit/streamlit/blob/d44b162909fb8adcae463172c78000029e5d2fef/lib/streamlit/echo.py>`_
     """
 
     from streamlit import code, warning, empty, source_util

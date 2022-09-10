@@ -1,4 +1,4 @@
-Multipaging
+Multipaging: A short guide
 ===============================================
 
 There are ways to have a multipage content

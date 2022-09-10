@@ -9,4 +9,4 @@ Optionally, the texts for success, error and button can be customized.
 
 .. raw:: html
 
-    <iframe src="https://stbook-methods.streamlitapp.com/?view=true_or_false&embedded=true" width="600" height="400"></iframe>
+    <iframe src="https://stbook-methods.streamlitapp.com/?view=true_or_false&embedded=true" width="700" height="700"></iframe>

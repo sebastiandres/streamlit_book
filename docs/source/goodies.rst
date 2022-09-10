@@ -3,8 +3,8 @@ Other goodies
 
 But wait, there's more!
 
-.. include:: colored_expanders.rst
+.. include:: goodies_colored_expanders.rst
 
-.. include:: echo.rst
+.. include:: goodies_echo.rst
     
-.. include:: share.rst
+.. include:: goodies_share.rst

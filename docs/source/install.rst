@@ -3,7 +3,8 @@ Installation
 
 The repository for the code is hosted at `<https://github.com/sebastiandres/streamlit_book>`_.
 
-**Install from pypi**
+From pypi
+------------
 
 You can install the library from `pypi <https://pypi.org/project/streamlit_book/>`_. 
 This is the safe way. Don't stray from this path.
@@ -24,7 +25,8 @@ Or, optionally, for the specific version X.Y.Z:
 
     streamlit_book==X.Y.Z
 
-**Install from repository**
+From repository
+--------------------
 
 You can install the library directly from the latest available version on github. 
 This is good for testing the library, but might encounter some bugs, in which case you should let us know!
