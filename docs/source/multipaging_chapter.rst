@@ -23,3 +23,8 @@ Using the function `set_chapter_config`:
 * Will read and render the files into streamlit, allowing a enriched markdown/python of the implemented activities.
 
 See the function `set_chapter_config` required and optional parameters on the :ref:`Multipaging Documentation`.
+
+.. raw:: html
+
+    <iframe src="https://stbook-multipaging.streamlitapp.com/chapter?embedded=true" width="700" height="700"></iframe>
+    <br><br>

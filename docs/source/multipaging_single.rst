@@ -13,3 +13,8 @@ Single page
 
     # No need to initialize the streamlit_book library
     stb.true_or_false("Are you a robot?", False)
+
+.. raw:: html
+
+    <iframe src="https://stbook-multipaging.streamlitapp.com/single?embedded=true" width="700" height="700"></iframe>
+    <br><br>

@@ -42,3 +42,8 @@ an awesome library to add a sidebar menu called (`streamlit_option_menu <https:/
 Kudos to the creator. It delivers a professional look, and allows to add `icons by name <https://icons.getbootstrap.com/>`_ makes it a lot more user-friendly. 
 
 See the function `set_book_config` required and optional parameters on the :ref:`Multipaging Documentation`.
+
+.. raw:: html
+
+    <iframe src="https://stbook-multipaging.streamlitapp.com/book?embedded=true" width="700" height="700"></iframe>
+    <br><br>
