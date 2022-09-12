@@ -28,15 +28,6 @@ def true_or_false(question, answer,
     :type button: str, optional
     :return: tuple of booleans(button_pressed, answer_correct) with the button status and correctness of answer
     :rtype: tuple of bool
-
-    Example:
-    import streamlit_book as stb
-    stb.true_or_false('Is "Indiana Jones and the Last Crusade" the best movie of the trilogy?',
-                        True,
-                        success="You have chosen wisely",
-                        error="You have chosen poorly",
-                        button="You must choose"
-                        )
     """
     if len(question)==0:
         st.error("Please provide a question")

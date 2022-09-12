@@ -37,10 +37,6 @@ def code_input(question, initial_code,
     :type button: str, optional
     :return: tuple of booleans with button press status and correctness of answer
     :rtype: tuple of bool
-
-    Example:
-    import streamlit_book as stb
-    stb.text_input("What is your name?", "", equals="Me")
     """
     user_code = st.text_input(question, initial_code)
     # Check if the correct checkboxes are checked

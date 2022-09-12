@@ -32,16 +32,6 @@ def multiple_choice(question, options_dict,
     :type button: str, optional
     :return: tuple of booleans with button press status and correctness of answer
     :rtype: tuple of bool
-
-    Example:
-    import streamlit_book as stb
-    stb.multiple_choice("I typically ask recruiters to point out which of these area pokemon",
-                        {"ditto":True, "jupyter":False, "pyspark":False,
-                        "scikit":False, "metapod":True, "vulpix":True},
-                        success="Are you a pokemon master?",
-                        error="Gotta catch them all!",
-                        button='Check my poke-knowledge!'
-                        )
     """
     cb_list = []
     if len(question)==0:

@@ -31,18 +31,7 @@ def single_choice(question, options, answer_index,
     :param button: message to be displayed on the button that checks the answer
     :type button: str, optional
     :return: tuple of booleans with button press status and correctness of answer
-    :rtype: tuple of bool
-
-    Example:
-    import streamlit_book as stb
-    stb.single_choice("What does pandas (python library) stands for?",
-                    ["The cutest bear", "Pure Adamantium Numeric Datasets And Stuff",
-                    "PArties & DAtaSets", "Panel Data"],
-                    3,
-                    success='Now you know!',
-                    error='Nopes, not this one...',
-                    button='Check'
-                    )    
+    :rtype: tuple of bool 
     """
     if len(question)==0:
         st.error("Please provide a question")

@@ -1,6 +1,10 @@
 import streamlit as st
 
 def add_color_to_expanders():
+    """
+    Adds color to the expanders.
+    Users don't need to call this function, is executed by default.
+    """
     # Define your javascript
     my_js = """
     // Define the colors

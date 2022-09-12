@@ -19,14 +19,7 @@ def to_do_list(tasks, header="", success=TODO_SUCCESS):
     :param success: success message
     :type success: str, optional
     :return: boolean with the exit status of the function
-    :rtype: bool
-
-    Example:
-    import streamlit_book as stb
-    stb.to_do_list({"task 1":True, "task 2":False, "task 3":False},
-                    header="A (completely optional) description for the to do list:",
-                    success="Congrats! You did it!"
-                    )    
+    :rtype: bool   
     """
     if len(tasks)==0:
         st.error("There are no tasks to display.")
