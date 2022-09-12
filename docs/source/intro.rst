@@ -23,7 +23,8 @@ Examples
 * `The (confusion) Matrix <https://confusion-matrix.streamlitapp.com/>`_: Take the blue pill to learn all about the confusion matrix.
 * `The Streamlitsaurus Rex <https://datasaurus.streamlitapp.com/>`_: Will teach you to always visualize your data, and exhibits the mythical Datasaurus.
 * `SatSchool <https://share.streamlit.io/spiruel/satschool/main/app.py>`_: interactive app how to manipulate and understand data from satellites in a range of environmental contexts.
-* `<https://stbook-methods.streamlitapp.com/>`_ : All the activities and goodies in streamlit_book!
-* `<https://stbook-multipaging.streamlitapp.com/>`_ : How to do multipage with streamlit book!
+* `Template for multipaging <https://stbook-template.streamlitapp.com/>`_: A template for a multipage app using streamlit_book, with public and private sections.
+* `stbook-methods.streamlitapp.com <https://stbook-methods.streamlitapp.com/>`_ : All the activities and goodies in streamlit_book!
+* `stbook-multipaging.streamlitapp.com <https://stbook-multipaging.streamlitapp.com/>`_ : How to do multipage with streamlit book!
 
 Are you using streamlit_book? `Let me know <https://twitter.com/sebastiandres>`_ and I will add it!
