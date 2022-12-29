@@ -1,8 +1,10 @@
 # streamlit_book
 
-[![Open in Streamlit][share_badge]][share_link]
-
 `streamlit_book` is a streamlit companion library, written in python+streamlit to create a interactive reader for the content on a given folder. It was developed on November 2021 during streamlit's hackathon - ended up being awarded one of the two best apps!
+
+## Documentation
+
+All the documentation is at [readthedocs](https://streamlit_book.readthedocs.io/).
 
 ## Demos
 
@@ -18,10 +20,6 @@ Some apps using the library are:
 * [Happy Birds](https://notangrybirds.streamlit.app/) : A self contained example that mixes features of the library with a funny twist.
 * [The (confusion) Matrix](https://confusion-matrix.streamlit.app/): Take the blue pill to learn all about the confusion matrix.
 * [The Streamlitsaurus Rex](https://datasaurus.streamlit.app/): Will teach you to always visualize your data, and exhibits the mythical Datasaurus.
-
-## Documentation
-
-All the documentation is at [readthedocs](https://streamlit_book.readthedocs.io/).
 
 ## How to use it
 
@@ -58,9 +56,6 @@ stb.set_book_config(menu_title="streamlit_book",
                     save_answers=True,
                     )
 ```
-
-[share_badge]: https://static.streamlit.io/badges/streamlit_badge_black_white.svg
-[share_link]: https://share.streamlit.io/sebastiandres/stb_book_demo_v070/main
 
 
 ## Star History
