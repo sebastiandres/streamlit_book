@@ -8,17 +8,16 @@
 
 The list of all demos of the library for release 0.7.0. are:
 
-* [Demo Activities v0.7.0](https://share.streamlit.io/sebastiandres/stb_activities_demo_v070/main): how activities can be used without multipage capability.
-* [Demo Chapter v0.7.0](https://share.streamlit.io/sebastiandres/stb_chapter_demo_v070/main): Using a chapter (previous/next pagination).
-* [Demo Book v0.7.0](https://share.streamlit.io/sebastiandres/stb_book_demo_v070/main): Using a book (sidebar navigation on chapters).
+* [Demo Methods](https://stbook-methods.streamlit.app/): differente activities and methods. 
+* [Demo Multipaging](https://stbook-multipaging.streamlit.app/): Different multipaging options (native and stbook).
 
 ## Examples 
 
 Some apps using the library are:
 
-* [Happy Birds](https://share.streamlit.io/sebastiandres/streamlit_happy_birds/main/happy_birds.py) : A self contained example that mixes features of the library with a funny twist.
-* [The (confusion) Matrix](https://share.streamlit.io/sebastiandres/ml-edu-1-confusion-matrix/main): Take the blue pill to learn all about the confusion matrix.
-* [The Streamlitsaurus Rex](https://share.streamlit.io/sebastiandres/streamlit_datasaurus/main/app.py): Will teach you to always visualize your data, and exhibits the mythical Datasaurus.
+* [Happy Birds](https://notangrybirds.streamlit.app/) : A self contained example that mixes features of the library with a funny twist.
+* [The (confusion) Matrix](https://confusion-matrix.streamlit.app/): Take the blue pill to learn all about the confusion matrix.
+* [The Streamlitsaurus Rex](https://datasaurus.streamlit.app/): Will teach you to always visualize your data, and exhibits the mythical Datasaurus.
 
 ## Documentation
 
