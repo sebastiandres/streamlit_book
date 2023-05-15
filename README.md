@@ -4,7 +4,7 @@
 
 ## Documentation
 
-All the documentation is at [readthedocs](https://streamlit_book.readthedocs.io/).
+All the documentation is at [readthedocs](https://streamlit-book.readthedocs.io/en/latest).
 
 ## Demos
 
