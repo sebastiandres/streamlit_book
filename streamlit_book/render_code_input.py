@@ -28,7 +28,7 @@ def code_input(question, initial_code,
     :param normalization_function: 
     :type normalization_function: function
     :param verification_function: 
-    :type normalization_function: function
+    :type verification_function: function
     :param success: message to be displayed when the user answers correctly
     :type success: str, optional
     :param error: message to be displayed when the user answers incorrectly

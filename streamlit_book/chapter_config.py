@@ -20,6 +20,28 @@ except Exception as e:
 except Exception as e:
     print("Cannot import! ", e)    
 
+def get_query():
+    """
+    Depending on streamlit's version, uses the previous or the new way to get the query params.
+    Previous: st.experimental_get_query_params()
+    New: st.query_params()
+    """
+    if hasattr(st, "query_params"):
+        return st.query_params.to_dict()
+    else:
+        return st.experimental_get_query_params()
+
+def set_query_params(**kwargs):
+    """
+    Depending on streamlit's version, uses the previous or the new way to set the query params.
+    Previous: st.experimental_set_query_params()
+    New: st.set_query_params()
+    """
+    if hasattr(st, "query_params"):
+        st.query_params.from_dict(**kwargs)
+    else:
+        st.experimental_set_query_params(**kwargs)
+
 def set_chapter_config(
                         path="pages",
                         toc=False,
@@ -69,7 +91,7 @@ def set_chapter_config(
 
     # Admin Login: if requested by the user on the url, it redirects to a specific amin page
     # Never shows the content, it will stay on the admin page.
-    query_params = st.experimental_get_query_params()
+    query_params = get_query_params()
     if "user" in query_params and "admin" in query_params["user"]:
         # Here we handle everything related to the admin
         admin_page()
@@ -77,7 +99,7 @@ def set_chapter_config(
 
     # User login
     if "user_id" not in st.session_state:
-        query_params = st.experimental_get_query_params()
+        query_params = get_query_params()
         if "token" in query_params:
             # Here we must handle the user session
             token = query_params["token"][0] #Just consider the first one
