@@ -20,7 +20,7 @@ except Exception as e:
 except Exception as e:
     print("Cannot import! ", e)    
 
-def get_query():
+def get_query_params():
     """
     Depending on streamlit's version, uses the previous or the new way to get the query params.
     Previous: st.experimental_get_query_params()

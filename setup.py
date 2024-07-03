@@ -1,41 +1,35 @@
-# Library to configure this setup file
-import pathlib
-from setuptools import find_packages, setup
+from pathlib import Path
 
-# VERSION - is a variable that is defined in the __init__.py file
-VERSION = "0.7.7"
+import setuptools
 
-HERE = pathlib.Path(__file__).parent
-PACKAGE_NAME = 'streamlit_book' #Debe coincidir con el nombre de la carpeta 
-AUTHOR = 'Sebastián Flores Benner'
-AUTHOR_EMAIL = 'sebastiandres@gmail.com'
-URL = 'https://github.com/sebastiandres/streamlit_book'
+this_directory = Path(__file__).parent
+long_description = (this_directory / "README.md").read_text()
 
-LICENSE = 'MIT' #Tipo de licencia
-DESCRIPTION = 'A streamlit companion library to create a interactive reader for the content on a given folder.'
-LONG_DESCRIPTION = (HERE / "README.md").read_text(encoding='utf-8')
-LONG_DESC_TYPE = "text/markdown"
-PROJECT_URLS = {
-                "Documentation": "https://streamlit-book.readthedocs.io/",
-                'Source': 'https://github.com/sebastiandres/streamlit_book/',
-                'Tracker': 'https://github.com/sebastiandres/streamlit_book/issues',
-                }
-# Libraries required by the package
-INSTALL_REQUIRES = ['streamlit', 'streamlit-option-menu']
-
-setup(
-    name=PACKAGE_NAME,
-    version=VERSION,
-    author=AUTHOR,
-    author_email=AUTHOR_EMAIL,
-    packages=find_packages(),
-    include_package_data=True,    
-    url=URL,
-    project_urls=PROJECT_URLS,
-    license=LICENSE,
-    description=DESCRIPTION,
-    long_description=LONG_DESCRIPTION,
-    long_description_content_type=LONG_DESC_TYPE,
-    setup_requires=INSTALL_REQUIRES,
-    install_requires=INSTALL_REQUIRES,
-    )
+setuptools.setup(
+    name="streamlit-slides",
+    version="0.7.8",
+    author="Sebastián Flores Benner",
+    author_email="sebastiandres@gmail.com",
+    description="A streamlit companion library to create a interactive reader for the content on a given folder",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    url="https://github.com/sebastiandres/streamlit_book",
+    packages=setuptools.find_packages(),
+    include_package_data=True,
+    classifiers=[],
+    python_requires=">=3.7",
+    install_requires=[
+        "streamlit >= 0.63",
+        'streamlit-option-menu',
+    ],
+    extras_require={
+        "devel": [
+            "wheel",
+            "pytest==7.4.0",
+            "playwright==1.36.0",
+            "requests==2.31.0",
+            "pytest-playwright-snapshot==1.0",
+            "pytest-rerunfailures==12.0",
+        ]
+    }
+)
